@@ -4,10 +4,16 @@
  */
 package dao;
 
+import java.util.List;
+
 /**
  *
  * @author admin
  */
 public interface CRUD<E> {
-    
+    List<E> getAll() throws Exception;
+    E getOne(int id) throws Exception;
+    boolean save(E obj) throws Exception;
+    boolean update(E obj) throws Exception;
+    boolean delete(int id) throws Exception;
 }

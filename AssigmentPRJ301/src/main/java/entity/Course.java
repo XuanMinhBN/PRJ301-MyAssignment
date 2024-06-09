@@ -18,4 +18,5 @@ public class Course {
     private List<Map<String, Double>> studentList;
     private Double averageMark;
     private boolean status;
+    private Double rate;
 }

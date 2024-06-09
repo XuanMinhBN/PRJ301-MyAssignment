@@ -66,3 +66,4 @@ CREATE TABLE feature(
 	id bigint primary key identity(1,1),
 	url varchar(300),
 );
+

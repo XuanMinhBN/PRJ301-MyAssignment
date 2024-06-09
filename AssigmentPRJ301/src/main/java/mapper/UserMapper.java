@@ -13,7 +13,6 @@ import java.sql.SQLException;
  * @author admin
  */
 public class UserMapper implements RowMapper<User>{
-
     @Override
     public User mapRow(ResultSet rs) throws SQLException {
         return User.builder()

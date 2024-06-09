@@ -14,8 +14,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mapper.UserMapper;
 
 /**
@@ -59,6 +57,7 @@ public class UserDAOImpl implements UserDAO{
                     f.setUrl(rs.getString("url"));
                     c_role.getFeatureList().add(f);
                 }
+                return new UserMapper().mapRow(rs);
             }
         } catch (Exception e) {
             try {

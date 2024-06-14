@@ -4,9 +4,9 @@
  */
 package mapper;
 
+import jakarta.annotation.Nullable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.jetbrains.annotations.Nullable;
 
 /**
  *

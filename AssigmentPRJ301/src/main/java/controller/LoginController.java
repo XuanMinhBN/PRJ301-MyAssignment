@@ -44,11 +44,11 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String username = request.getParameter("");
+        String email = request.getParameter("");
         String password = request.getParameter("");
         
         UserDAO db = new UserDAOImpl();
-        User user = db.getAccount(username, password);
+        User user = db.getAccount(email, password);
         if(user !=null)
         {
             request.getSession().setAttribute("account", user);

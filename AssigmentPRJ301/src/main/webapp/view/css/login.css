@@ -1,0 +1,89 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 9 Jun 2024, 09:19:29
+    Author     : admin
+*/
+.form-popup {
+  position: fixed;
+  top: 240px;
+  width: 720px;
+  border: 1px solid #000;
+}
+.form-popup .form-box {
+  display: flex;
+}
+.form-box {
+  justify-content: center;
+}
+.form-box .form-register {
+  max-width: 540px;
+  width: 60%;
+  padding: 10px 20px;
+}
+.form-select {
+  margin-bottom: 20px;
+}
+.switch {
+  display: flex;
+  justify-content: center;
+  right: 100px;
+  margin-bottom: 30px;
+}
+.switch::after {
+  content: "";
+  height: 6px;
+  width: 60px;
+  border-radius: 60px 60px 0 0;
+  position: absolute;
+  bottom: 0;
+  left: 8px;
+  transition: 0.3s ease;
+}
+.switch.active::after {
+  left: 82px;
+  width: 70px;
+}
+
+.personal-form {
+  padding: 5px 12px;
+  background: #000;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  text-align: center;
+  margin-left: 4px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  color: #fff;
+}
+.business-form {
+  padding: 5px 12px;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  text-align: center;
+  margin-left: 4px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.form-register .register-type {
+  width: 100%;
+  margin-top: 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.register-type #form {
+  width: 200%;
+  position: relative;
+  display: flex;
+  margin: auto;
+  transition: 0.2s ease-in-out;
+}
+#page {
+  margin: auto;
+  width: 100%;
+}

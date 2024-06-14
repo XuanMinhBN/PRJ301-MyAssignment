@@ -40,16 +40,16 @@ public class UserDAOImpl implements UserDAO{
                     user.setUsername(rs.getString("username"));
                 }
                 
-                Long roleid = rs.getLong("id");
+                Long roleid = rs.getLong("role_id");
                 if(roleid!=0 && c_role.getId().equals(roleid))
                 {
                     c_role = new Role();
                     c_role.setId(roleid);
-                    c_role.setName(rs.getString("rolename"));
+                    c_role.setName(rs.getString("role_name"));
                     user.getRoleList().add(c_role);
                 }
                 
-                Long featureid = rs.getLong("id");
+                Long featureid = rs.getLong("feature_id");
                 if(featureid != 0)
                 {
                     Feature f = new Feature();

@@ -8,11 +8,12 @@ import dao.impl.UserDAOImpl;
 import dao.object.UserDAO;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,12 +45,18 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("");
-        String password = request.getParameter("");
+        String email = request.getParameter("stu-email");
+        String password = request.getParameter("stu-password");
+        
         
         UserDAO db = new UserDAOImpl();
-        User user = db.getAccount(email, password);
-        if(user !=null)
+        User user = null;
+        try {
+            user = db.getAccount(email, password);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        if(user != null)
         {
             request.getSession().setAttribute("account", user);
             response.getWriter().println("Hello "+user.getUsername()+"!");

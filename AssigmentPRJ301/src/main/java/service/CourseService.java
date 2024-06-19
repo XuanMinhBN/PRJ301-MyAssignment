@@ -2,15 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao.object;
+package service;
 
-import dao.CRUD;
-import entity.User;
+import dao.object.CourseDAO;
 
 /**
  *
  * @author admin
  */
-public interface UserDAO extends CRUD<User>{
-    public User getAccount(String email, String password) throws Exception;
+public interface CourseService extends CourseDAO{
+    
 }

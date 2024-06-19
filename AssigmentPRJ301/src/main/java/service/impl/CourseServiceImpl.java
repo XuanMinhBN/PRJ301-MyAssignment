@@ -4,46 +4,58 @@
  */
 package service.impl;
 
-import dao.impl.UserDAOImpl;
-import dao.object.UserDAO;
-import entity.User;
+import connection.SQLConnection;
+import static dao.Query.GET_LECTURER_OF_COURSE;
+import dao.impl.CourseDAOImpl;
+import dao.object.CourseDAO;
+import entity.Course;
+import entity.Lecturer;
+import entity.Semester;
+import entity.Subject;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import service.UserService;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import service.CourseService;
 
 /**
  *
  * @author admin
  */
-public class UserServiceImpl implements UserService{
-    UserDAO userDAO = new UserDAOImpl();
-    
+public class CourseServiceImpl implements CourseService{
+    CourseDAO courseDAO = new CourseDAOImpl();
+
     @Override
-    public User getAccount(String email, String password) throws Exception{
-        return userDAO.getAccount(email, password);
+    public ArrayList<Course> filterByLecturerID(int id) throws Exception{
+        return courseDAO.filterByLecturerID(id);
     }
 
     @Override
-    public List<User> getAll() throws Exception {
+    public List<Course> getAll() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public User getOne(int id) throws Exception {
+    public Course getOne(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean save(User obj) throws Exception {
+    public boolean save(Course obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean update(User obj) throws Exception {
+    public boolean update(Course obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean delete(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }    
+    }   
 }

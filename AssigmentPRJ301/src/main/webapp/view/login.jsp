@@ -30,19 +30,19 @@
                     <div class="form-popup">
                         <div class="form-box">
                             <div class="form-register">
-                                <h2 style="margin-bottom: 20px">Login with your role</h2>
+                                <h2 class="text-center" style="margin-bottom: 20px">Login with your role</h2>
                                 <div class="switch">
                                     <div class="personal-form" onclick="tab1()">Student</div>
                                     <div class="business-form" onclick="tab2()">Teacher</div>
                                 </div>
                                 <div class="register-type">
-                                    <form id="form">
+                                    <form id="form" action="login" method="POST">
                                         <div id="page" class="personal-switch">
                                             <select
                                                 class="form-select"
                                                 aria-label="Default select example"
                                                 >
-                                                <option selected>What is your campus?</option>
+                                                <option>What is your campus?</option>
                                                 <option value="1">Hola</option>
                                                 <option value="2">Fuda</option>
                                                 <option value="3">Hovilo</option>
@@ -50,6 +50,7 @@
                                             </select>
                                             <div class="register_email mb-3">
                                                 <input
+                                                    name="stu-email"
                                                     type="email"
                                                     class="form-control"
                                                     id="registEmail"
@@ -59,6 +60,7 @@
                                             </div>
                                             <div class="register_password mb-3">
                                                 <input
+                                                    name="stu-password"
                                                     type="password"
                                                     class="form-control"
                                                     id="registPassword"
@@ -83,6 +85,7 @@
                                             </select>
                                             <div class="register_email mb-3">
                                                 <input
+                                                    name="email"
                                                     type="email"
                                                     class="form-control"
                                                     id="registEmail"
@@ -92,6 +95,7 @@
                                             </div>
                                             <div class="register_password mb-3">
                                                 <input
+                                                    name="password"
                                                     type="password"
                                                     class="form-control"
                                                     id="registPassword"

@@ -5,12 +5,13 @@
 package dao.object;
 
 import dao.CRUD;
-import entity.User;
+import entity.Course;
+import java.util.ArrayList;
 
 /**
  *
  * @author admin
  */
-public interface UserDAO extends CRUD<User>{
-    public User getAccount(String email, String password) throws Exception;
+public interface CourseDAO extends CRUD<Course>{
+    ArrayList<Course> filterByLecturerID(int id) throws Exception;
 }

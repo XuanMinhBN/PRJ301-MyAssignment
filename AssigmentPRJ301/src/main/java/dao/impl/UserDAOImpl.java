@@ -5,7 +5,7 @@
 package dao.impl;
 
 import connection.SQLConnection;
-import static dao.Query.GET_USER_ACCOUNT;
+import dao.Query;
 import dao.object.UserDAO;
 import entity.Feature;
 import entity.Role;
@@ -13,6 +13,7 @@ import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import mapper.UserMapper;
 
@@ -20,15 +21,16 @@ import mapper.UserMapper;
  *
  * @author admin
  */
-public class UserDAOImpl implements UserDAO{
+public class UserDAOImpl implements UserDAO, Query{
     
     @Override
-    public User getAccount(String email, String password) {
+    public User getAccount(String email, String password) throws Exception {
         try (
             Connection connection = SQLConnection.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_USER_ACCOUNT)
         ) {
             ps.setString(1, email);
+            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             Role c_role = new Role();
             User user = null;
@@ -37,6 +39,7 @@ public class UserDAOImpl implements UserDAO{
                 if (user == null) {
                     user = new User();
                     user.setEmail(email);
+                    user.setPassword(password);
                     user.setUsername(rs.getString("username"));
                 }
                 
@@ -60,18 +63,26 @@ public class UserDAOImpl implements UserDAO{
                 return new UserMapper().mapRow(rs);
             }
         } catch (Exception e) {
-            try {
-                throw new Exception(e.getMessage());
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
+            throw new Exception(e.getMessage());
         }
         return null;
     }
 
     @Override
     public List<User> getAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<User> ls = new ArrayList<>();
+        try(
+            Connection connection = SQLConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(GET_ALL)
+        ){
+          ResultSet rs = ps.executeQuery();
+          while(rs.next()){
+              ls.add(new UserMapper().mapRow(rs));
+          }
+        }catch(Exception e){
+            throw new Exception(e.getMessage());
+        }
+        return ls;
     }
 
     @Override

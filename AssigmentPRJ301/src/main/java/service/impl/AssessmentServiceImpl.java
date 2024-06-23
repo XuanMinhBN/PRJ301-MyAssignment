@@ -4,22 +4,11 @@
  */
 package service.impl;
 
-import connection.SQLConnection;
-import static dao.Query.GET_ASSESSMENT_TABLE;
-import static dao.Query.GET_LECTURER_OF_COURSE;
 import dao.impl.AssessmentDAOImpl;
 import dao.object.AssessmentDAO;
-import entity.Assessment;
 import entity.Exam;
-import entity.Subject;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import service.AssessmentService;
 
 /**

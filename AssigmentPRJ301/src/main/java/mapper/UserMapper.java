@@ -16,7 +16,7 @@ public class UserMapper implements RowMapper<User>{
     @Override
     public User mapRow(ResultSet rs) throws SQLException {
         return User.builder()
-                .id(rs.getLong("id"))
+                .id(rs.getLong("user_account_id"))
                 .username(rs.getString("username"))
                 .email(rs.getString("email"))
                 .password(rs.getString("password"))

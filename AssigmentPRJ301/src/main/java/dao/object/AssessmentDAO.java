@@ -5,7 +5,6 @@
 package dao.object;
 
 import dao.CRUD;
-import entity.Assessment;
 import entity.Exam;
 import java.util.ArrayList;
 

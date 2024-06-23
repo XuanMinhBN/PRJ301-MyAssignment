@@ -4,24 +4,29 @@
  */
 package controller;
 
-import dao.impl.UserDAOImpl;
-import dao.object.UserDAO;
-import entity.User;
+import entity.Course;
+import entity.Exam;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import service.AssessmentService;
+import service.CourseService;
+import service.impl.AssessmentServiceImpl;
+import service.impl.CourseServiceImpl;
 
 /**
  *
  * @author admin
  */
-public class LoginController extends HttpServlet {
-    
+public class LecturerViewExamController extends HttpServlet {
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -29,12 +34,21 @@ public class LoginController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        request.getRequestDispatcher("view/login.jsp").forward(request, response);
-    } 
+            throws ServletException, IOException {
+        try {
+            CourseService courseDB = new CourseServiceImpl();
+            int lecturer_id = Integer.parseInt(request.getParameter("lecturer_id"));
+            ArrayList<Course> courses = courseDB.filterByLecturerID(lecturer_id);
+            request.setAttribute("course", courses);
+            request.getRequestDispatcher("../view/lecturer-view.jsp").forward(request, response);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -42,31 +56,21 @@ public class LoginController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        String email = request.getParameter("stu-email");
-        String password = request.getParameter("stu-password");
-        
-        
-        UserDAO db = new UserDAOImpl();
-        User user = null;
+            throws ServletException, IOException {
+        int course_id = Integer.parseInt(request.getParameter("course_id"));
+        AssessmentService assessmentDB = new AssessmentServiceImpl();
         try {
-            user = db.getAccount(email, password);
+            ArrayList<Exam> exams = assessmentDB.getRelatedExams(course_id);
+            request.setAttribute("exams", exams);
+            request.getRequestDispatcher("../view/lecturer-view.jsp").forward(request, response);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        if(user != null)
-        {
-            request.getSession().setAttribute("account", user);
-            response.getWriter().println("Hello "+user.getUsername()+"!");
-        }
-        else
-        {
-            response.getWriter().println("Login failed!");
-        }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

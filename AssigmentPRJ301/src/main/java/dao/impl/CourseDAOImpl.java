@@ -39,7 +39,7 @@ public class CourseDAOImpl implements CourseDAO, Query{
                 c.setName(rs.getString("course_name"));
 
                 Lecturer l = new Lecturer();
-                l.setId(rs.getInt("lecturer_id"));
+                l.setId(rs.getLong("lecturer_id"));
                 c.setLecturer(l);
 
                 Subject sub = new Subject();

@@ -31,11 +31,10 @@ public interface Query {
             + "WHERE s.active = 1 AND c.lecturer_id = ?";
 
     //Query for AssessmentDAO
-    String GET_ASSESSMENT_TABLE = "SELECT a.aid,a.aname,a.weight,sub.subid,sub.subname\n"
-            + "	,e.eid,e.[from],e.duration\n"
-            + "FROM\n"
-            + "exams e INNER JOIN assesments a ON e.aid = a.aid\n"
-            + "		INNER JOIN subjects sub ON sub.subid = a.subid\n"
-            + "		INNER JOIN courses c ON c.subid = sub.subid\n"
-            + "WHERE c.cid = ?";
+    String GET_ASSESSMENT_TABLE = "SELECT a.assesment_id, a.assesment_name, a.weight_mark, sub.subject_id, sub.subject_name, e.exam_id, e.start_time, e.duration\n"
+            + "FROM exams e \n"
+            + "INNER JOIN assesment a ON e.assesment_id = a.assesment_id\n"
+            + "INNER JOIN subjects sub ON sub.subject_id = a.subject_id\n"
+            + "INNER JOIN course c ON c.subject_id = sub.subject_id\n"
+            + "WHERE c.course_id = ?";
 }

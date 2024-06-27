@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <servlet>
+        <servlet-name>LecturerViewController</servlet-name>
+        <servlet-class>controller.LecturerViewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LecturerMarkController</servlet-name>
+        <servlet-class>controller.LecturerMarkController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LecturerViewController</servlet-name>
+        <url-pattern>/lecturer/view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LecturerMarkController</servlet-name>
+        <url-pattern>/lecturer/mark</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

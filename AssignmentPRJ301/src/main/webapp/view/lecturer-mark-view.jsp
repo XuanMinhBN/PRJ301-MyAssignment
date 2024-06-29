@@ -29,7 +29,7 @@
                     <td>${s.name}</td>
                     <c:forEach items="${requestScope.exams}" var="e">
                         <td>
-                            <input type="hidden" name="gradeid" value="${s.id}_${e.id}" />
+                            <input type="hidden" name="grade_id" value="${s.id}_${e.id}" />
                             <input type="text" name="grade${s.id}_${e.id}" 
                                    
                                    <c:forEach items="${requestScope.grades}" var="g">

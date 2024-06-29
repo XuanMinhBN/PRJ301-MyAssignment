@@ -8,6 +8,14 @@
         <servlet-name>LecturerMarkController</servlet-name>
         <servlet-class>controller.LecturerMarkController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginForStudentController</servlet-name>
+        <servlet-class>controller.LoginForStudentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LecturerViewController</servlet-name>
         <url-pattern>/lecturer/view</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>LecturerMarkController</servlet-name>
         <url-pattern>/lecturer/mark</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/lecturer/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginForStudentController</servlet-name>
+        <url-pattern>/student/login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

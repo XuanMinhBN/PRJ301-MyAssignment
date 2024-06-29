@@ -25,7 +25,7 @@
         </form>
         </c:if>
         <c:if test="${requestScope.exams ne null}">
-            <form action="" method="GET">
+            <form action="mark" method="GET">
                 <input type="hidden" name="lecturer_id" value="${param.lecturer_id}"/>
                 <input type="hidden" name="course_id" value="${param.course_id}"/>
                 <c:forEach items="${requestScope.exams}" var="e">

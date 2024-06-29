@@ -25,7 +25,7 @@ public class ExamDAOImpl implements ExamDAO ,Query{
         ArrayList<Exam> exams = new ArrayList<>();
         String sql = GET_EXAMS;
         for (int examId : examIds) {
-            sql+= " OR eid = ? ";
+            sql+= " OR exam_id = ? ";
         }
         try(
             Connection connection = SQLConnection.getConnection();

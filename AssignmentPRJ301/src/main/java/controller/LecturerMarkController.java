@@ -14,8 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import service.ExamService;
 import service.GradeService;
 import service.StudentService;
@@ -110,7 +108,7 @@ public class LecturerMarkController extends HttpServlet {
         }
         String url_examId = "";
         for (String examId : examIds) {
-            url_examId += "&eid=" + examId;
+            url_examId += "&exam_id=" + examId;
         }
 
         response.sendRedirect("mark?course_id=" + courseId + url_examId);

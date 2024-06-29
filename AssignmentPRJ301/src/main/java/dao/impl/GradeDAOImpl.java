@@ -15,8 +15,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +27,7 @@ public class GradeDAOImpl implements GradeDAO, Query{
         ArrayList<Grade> grades = new ArrayList<>();
         String sql = GET_GRADE;
         for (int examId : examIds) {
-            sql += " OR eid = ? ";
+            sql += " OR exam_id = ? ";
         }
         try(
             Connection connection = SQLConnection.getConnection();

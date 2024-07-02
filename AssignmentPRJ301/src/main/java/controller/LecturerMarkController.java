@@ -4,12 +4,15 @@
  */
 package controller;
 
+import controller.authentication.BaseRequiredLecturerAuthenticationController;
+import entity.Assessment;
 import entity.Exam;
 import entity.Grade;
+import entity.Lecturer;
 import entity.Student;
+import entity.UserAccount;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ import service.impl.StudentServiceImpl;
  *
  * @author admin
  */
-public class LecturerMarkController extends HttpServlet {
+public class LecturerMarkController extends BaseRequiredLecturerAuthenticationController {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -37,7 +40,7 @@ public class LecturerMarkController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount user, Lecturer lecturer)
             throws ServletException, IOException {
         StudentService stuDB = new StudentServiceImpl();
         ExamService examDB = new ExamServiceImpl();
@@ -48,6 +51,7 @@ public class LecturerMarkController extends HttpServlet {
         } else {
             int courseId = Integer.parseInt(request.getParameter("course_id"));
             ArrayList<Student> students;
+            ArrayList<Assessment> assessments;
             ArrayList<Exam> exams;
             ArrayList<Grade> grades;
             try {
@@ -56,15 +60,16 @@ public class LecturerMarkController extends HttpServlet {
                 for (int i = 0; i < raw_examIds.length; i++) {
                     examIds[i] = Integer.parseInt(raw_examIds[i]);
                 }
-                exams = examDB.getExamsByEids(examIds);
+                assessments = examDB.getAssessmentTable(examIds);
                 grades = gradeDB.getGradesByEids(examIds);
                 request.setAttribute("students", students);
-                request.setAttribute("exams", exams);
+                request.setAttribute("assessments", assessments);
+//                request.setAttribute("exams", exams);
                 request.setAttribute("grades", grades);
             } catch (Exception ex) {
                 System.out.println(ex);
             }
-            request.getRequestDispatcher("../view/lecturer-mark-view.jsp").forward(request, response);
+            request.getRequestDispatcher("../view/lecturerUI/lecturer-mark-view.jsp").forward(request, response);
         }
     }
 
@@ -77,7 +82,7 @@ public class LecturerMarkController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount user, Lecturer lecturer)
             throws ServletException, IOException {
         int courseId = Integer.parseInt(request.getParameter("course_id"));
         String[] raw_gradeids = request.getParameterValues("grade_id");

@@ -12,7 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import entity.Assessment;
+import entity.Course;
 import entity.Exam;
+import entity.Semester;
 import entity.Subject;
 
 /**
@@ -55,6 +57,43 @@ public class AssessmentDAOImpl implements AssessmentDAO, Query{
             throw new Exception(ex.getMessage());
         }
         return exams;
+    }
+
+    @Override
+    public ArrayList<Assessment> getAssessment(int courseId) throws Exception {
+        ArrayList<Assessment> assessmentList = new ArrayList<>();
+        try(
+            Connection connection = SQLConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(GET_ASSESSMENT_FOR_EACH_SUBJECT)
+            ){
+            ps.setInt(1, courseId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                Assessment a = new Assessment();
+                a.setId(rs.getInt("assesment_id"));
+                a.setName(rs.getString("assesment_name"));
+                a.setWeight(rs.getFloat("weight_mark"));
+                
+                Subject sub= new Subject();
+                sub.setId(rs.getInt("subject_id"));
+                sub.setName(rs.getString("subject_name"));
+                a.setSubject(sub);
+                
+                Course c = new Course();
+                c.setName(rs.getString("course_name"));
+                c.setSubject(a.getSubject());
+                
+                Semester se = new Semester();
+                c.setSemester(se);
+                
+                assessmentList.add(a);
+                
+            }
+        }catch(Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+        return assessmentList;
     }
     
 }

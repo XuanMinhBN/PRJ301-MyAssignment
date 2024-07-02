@@ -6,6 +6,7 @@ package service.impl;
 
 import dao.ExamDAO;
 import dao.impl.ExamDAOImpl;
+import entity.Assessment;
 import entity.Exam;
 import java.util.ArrayList;
 import service.ExamService;
@@ -20,6 +21,11 @@ public class ExamServiceImpl implements ExamService{
     @Override
     public ArrayList<Exam> getExamsByEids(int[] examIds) throws Exception {
         return examDAO.getExamsByEids(examIds);
+    }
+
+    @Override
+    public ArrayList<Assessment> getAssessmentTable(int[] assessmentId) throws Exception {
+        return examDAO.getAssessmentTable(assessmentId);
     }
     
 }

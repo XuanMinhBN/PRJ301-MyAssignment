@@ -4,14 +4,17 @@
  */
 package controller;
 
+import controller.authentication.BaseRequiredLecturerAuthenticationController;
+import entity.Assessment;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import entity.Course;
 import entity.Exam;
+import entity.Lecturer;
+import entity.UserAccount;
 import service.AssessmentService;
 import service.CourseService;
 import service.impl.AssessmentServiceImpl;
@@ -21,7 +24,7 @@ import service.impl.CourseServiceImpl;
  *
  * @author admin
  */
-public class LecturerViewController extends HttpServlet {
+public class LecturerViewController extends BaseRequiredLecturerAuthenticationController {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -33,7 +36,7 @@ public class LecturerViewController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount user, Lecturer lecturer)
             throws ServletException, IOException {
         CourseService db = new CourseServiceImpl();
         int lecturerId = Integer.parseInt(request.getParameter("lecturer_id"));
@@ -44,7 +47,7 @@ public class LecturerViewController extends HttpServlet {
             System.out.println(ex.getMessage());
         }
         request.setAttribute("course", courses);
-        request.getRequestDispatcher("../view/lecturer-view.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/lecturerUI/lecturer-view.jsp").forward(request, response);
     }
 
     /**
@@ -56,18 +59,21 @@ public class LecturerViewController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount user, Lecturer lecturer)
             throws ServletException, IOException {
         int courseId = Integer.parseInt(request.getParameter("course_id"));
         AssessmentService db = new AssessmentServiceImpl();
-        ArrayList<Exam> exams = null;
+        ArrayList<Assessment> assessList = null;
+        ArrayList<Exam> examList = null;
         try {
-            exams = db.getRelatedExams(courseId);
+            assessList = db.getAssessment(courseId);
+            examList = db.getRelatedExams(courseId);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        request.setAttribute("exams", exams);
-        request.getRequestDispatcher("../view/lecturer-view.jsp").forward(request, response);
+        request.setAttribute("assessment", assessList);
+        request.setAttribute("exams", examList);
+        request.getRequestDispatcher("../view/lecturerUI/lecturer-view.jsp").forward(request, response);
     }
 
     /**

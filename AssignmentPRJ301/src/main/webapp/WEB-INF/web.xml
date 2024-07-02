@@ -9,8 +9,8 @@
         <servlet-class>controller.LecturerMarkController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginController</servlet-name>
-        <servlet-class>controller.LoginController</servlet-class>
+        <servlet-name>LoginForLecturerController</servlet-name>
+        <servlet-class>controller.LoginForLecturerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginForStudentController</servlet-name>
@@ -25,7 +25,7 @@
         <url-pattern>/lecturer/mark</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoginController</servlet-name>
+        <servlet-name>LoginForLecturerController</servlet-name>
         <url-pattern>/lecturer/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

@@ -4,19 +4,22 @@
  */
 package entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author X1 Nano
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Semester {
     private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    
+    private int year;
+    private String season;
+    private boolean active;
 }

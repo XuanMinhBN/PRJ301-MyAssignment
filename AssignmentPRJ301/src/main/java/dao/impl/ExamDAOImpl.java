@@ -56,5 +56,43 @@ public class ExamDAOImpl implements ExamDAO ,Query{
         }
         return exams;
     }
+
+    @Override
+    public ArrayList<Assessment> getAssessmentTable(int[] assessmentIds) throws Exception {
+        ArrayList<Assessment> assessments = new ArrayList<>();
+        String sql = GET_ASSESSMENT_ONLY;
+        for (int examId : assessmentIds) {
+            sql+= " OR a.assesment_id = ? ";
+        }
+        try(
+            Connection connection = SQLConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)
+            ){
+            for (int i = 0; i < assessmentIds.length; i++) {
+                ps.setInt((i+1), assessmentIds[i]);
+            }
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                Assessment a = new Assessment();
+                a.setId(rs.getInt("assesment_id"));
+                a.setName(rs.getString("assesment_name"));
+                a.setWeight(rs.getFloat("weight_mark"));
+                
+                Exam exam = new Exam();
+                exam.setId(rs.getInt("exam_id"));
+                exam.setDate(rs.getTimestamp("start_time"));
+                exam.setDuration(rs.getInt("duration"));
+                exam.setAssessment(a);
+                
+                assessments.add(a);
+                
+            }
+        }catch(Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+        return assessments;
+    }
+    
     
 }

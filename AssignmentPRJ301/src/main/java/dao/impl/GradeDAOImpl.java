@@ -7,9 +7,11 @@ package dao.impl;
 import connection.SQLConnection;
 import constants.Query;
 import dao.GradeDAO;
+import entity.Assessment;
 import entity.Exam;
 import entity.Grade;
 import entity.Student;
+import entity.Subject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,9 +27,9 @@ public class GradeDAOImpl implements GradeDAO, Query{
     @Override
     public ArrayList<Grade> getGradesByEids(int[] examIds) throws Exception {
         ArrayList<Grade> grades = new ArrayList<>();
-        String sql = GET_GRADE;
+        String sql = GET_GRADE_TABLE;
         for (int examId : examIds) {
-            sql += " OR exam_id = ? ";
+            sql += " OR a.assesment_id = ? ";
         }
         try(
             Connection connection = SQLConnection.getConnection();
@@ -38,8 +40,18 @@ public class GradeDAOImpl implements GradeDAO, Query{
             }
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                Subject subject = new Subject();
+                subject.setId(rs.getInt("subject_id"));
+                
+                Assessment assessment = new Assessment();
+                assessment.setId(rs.getInt("assesment_id"));
+                assessment.setName(rs.getString("assesment_name"));
+                assessment.setWeight(rs.getFloat("weight_mark"));
+                assessment.setSubject(subject);
+                
                 Exam exam = new Exam();
                 exam.setId(rs.getInt("exam_id"));
+                exam.setAssessment(assessment);
 
                 Student s = new Student();
                 s.setId(rs.getInt("student_id"));

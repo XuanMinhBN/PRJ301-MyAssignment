@@ -31,7 +31,7 @@ public class LoginForLecturerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/login.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/lecturerUI/lecturer-login.jsp").forward(request, response);
     }
 
     /**
@@ -54,7 +54,7 @@ public class LoginForLecturerController extends HttpServlet {
             user = db.getUserByUsernamePassword(username, password);
             if (user != null) {
                 request.getSession().setAttribute("user", user);
-                response.getWriter().println("Login successful: " + user.getDisplayname());
+                response.sendRedirect("/AssignmentPRJ301/lecturer/view?lecturer_id="+user.getLecturer().getId());
             } else {
                 response.getWriter().println("Login failed!");
             }

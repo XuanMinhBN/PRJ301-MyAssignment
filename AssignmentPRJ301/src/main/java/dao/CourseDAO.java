@@ -13,4 +13,6 @@ import entity.Course;
  */
 public interface CourseDAO {
     ArrayList<Course> filterByLecturerID(int lecturerId) throws Exception;
+    
+    ArrayList<Course> filterByStudentID(int studentId) throws Exception;
 }

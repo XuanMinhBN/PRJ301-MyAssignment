@@ -49,9 +49,9 @@ public abstract class BaseRequiredStudentAuthenticationController extends HttpSe
         }
     }
 
-    protected abstract void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount user, Student lecturer)
+    protected abstract void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount user, Student student)
             throws ServletException, IOException;
 
-    protected abstract void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount user, Student lecturer)
+    protected abstract void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount user, Student student)
             throws ServletException, IOException;
 }

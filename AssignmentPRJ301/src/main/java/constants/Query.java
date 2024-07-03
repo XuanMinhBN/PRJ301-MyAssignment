@@ -27,6 +27,17 @@ public interface Query {
             + "ON s.semester_id = c.semester_id\n"
             + "INNER JOIN subjects sub ON sub.subject_id = c.subject_id\n"
             + "WHERE s.active = 1 AND c.lecturer_id = ?";
+    String GET_STUDENT_OF_COURSE = "SELECT s.student_id, s.roll, s.student_name, c.course_id, c.course_name, sub.subject_name, CONCAT(se.season,' ',semester_year) AS semester_name \n"
+            + "FROM student s\n"
+            + "JOIN student_and_course sc\n"
+            + "ON sc.student_id = s.student_id\n"
+            + "JOIN course c\n"
+            + "ON c.course_id = sc.course_id\n"
+            + "JOIN subjects sub\n"
+            + "ON c.subject_id = sub.subject_id\n"
+            + "JOIN semester se\n"
+            + "ON c.semester_id = se.semester_id\n"
+            + "WHERE se.active = 1 AND s.student_id = ?";
 
     //Query for AssessmentDAO
     String GET_ASSESSMENT_TABLE = "SELECT a.assesment_id, a.assesment_name, a.weight_mark, sub.subject_id, sub.subject_name, e.exam_id, e.start_time, e.duration\n"

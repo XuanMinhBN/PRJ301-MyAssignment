@@ -21,4 +21,9 @@ public class CourseServiceImpl implements CourseService{
     public ArrayList<Course> filterByLecturerID(int lecturerId) throws Exception {
         return courseDAO.filterByLecturerID(lecturerId);
     }
+
+    @Override
+    public ArrayList<Course> filterByStudentID(int studentId) throws Exception {
+        return courseDAO.filterByStudentID(studentId);
+    }
 }

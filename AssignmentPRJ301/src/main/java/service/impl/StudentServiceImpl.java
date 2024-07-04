@@ -21,5 +21,4 @@ public class StudentServiceImpl implements StudentService{
     public ArrayList<Student> getStudentsByCourse(int course_id) throws Exception {
         return studentDAO.getStudentsByCourse(course_id);
     }
-    
 }

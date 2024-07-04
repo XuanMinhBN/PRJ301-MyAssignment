@@ -11,13 +11,21 @@ package constants;
 public interface Query {
 
     //Query for UserAccountDAO
-    String GET_USER_ACCOUNT
+    String GET_LECTURER_ACCOUNT
             = "SELECT u.username,u.displayname,l.lecturer_id,l.lecturer_name\n"
             + "FROM user_account u \n"
             + "LEFT JOIN lecturer_account la \n"
             + "ON la.username = u.username AND la.active = 1\n"
             + "LEFT JOIN lecturer l \n"
             + "ON la.lecturer_id = l.lecturer_id\n"
+            + "WHERE u.username = ? AND u.[password] = ?";
+    String GET_STUDENT_ACCOUNT
+            = "SELECT u.username,u.displayname,s.student_id,s.student_name,s.roll\n"
+            + "FROM user_account u \n"
+            + "LEFT JOIN student_account sa \n"
+            + "ON sa.username = u.username AND sa.active = 1\n"
+            + "LEFT JOIN student s \n"
+            + "ON sa.student_id = s.student_id\n"
             + "WHERE u.username = ? AND u.[password] = ?";
 
     //Query for CourseDAO
@@ -27,7 +35,7 @@ public interface Query {
             + "ON s.semester_id = c.semester_id\n"
             + "INNER JOIN subjects sub ON sub.subject_id = c.subject_id\n"
             + "WHERE s.active = 1 AND c.lecturer_id = ?";
-    String GET_STUDENT_OF_COURSE = "SELECT s.student_id, s.roll, s.student_name, c.course_id, c.course_name, sub.subject_name, CONCAT(se.season,' ',semester_year) AS semester_name \n"
+    String GET_STUDENT_OF_COURSE = "SELECT s.student_id, s.roll, s.student_name, c.course_id, c.course_name, c.subject_id, sub.subject_name, se.semester_id, se.season, se.semester_year \n"
             + "FROM student s\n"
             + "JOIN student_and_course sc\n"
             + "ON sc.student_id = s.student_id\n"

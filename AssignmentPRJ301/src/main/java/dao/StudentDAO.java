@@ -12,5 +12,5 @@ import java.util.ArrayList;
  * @author admin
  */
 public interface StudentDAO {
-    ArrayList<Student> getStudentsByCourse(int course_id) throws Exception;
+    ArrayList<Student> getStudentsByCourse(int courseId) throws Exception;
 }

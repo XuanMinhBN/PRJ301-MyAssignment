@@ -51,7 +51,7 @@ public class LoginForLecturerController extends HttpServlet {
         UserAccountService db = new UserAccountServiceImpl();
         UserAccount user;
         try {
-            user = db.getUserByUsernamePassword(username, password);
+            user = db.getLecturerByUsernamePassword(username, password);
             if (user != null) {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("/AssignmentPRJ301/lecturer/view?lecturer_id="+user.getLecturer().getId());

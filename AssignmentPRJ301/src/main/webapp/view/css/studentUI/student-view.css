@@ -1,0 +1,28 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 4 Jul 2024, 11:06:39
+    Author     : admin
+*/
+h3{
+    color:#fff;
+    background: lightblue;
+}
+.student-info{
+    display: flex;
+    justify-content: space-evenly;
+}
+.student-name h5{
+    padding: 10px;
+    background: pink;
+    color:#fff;
+    border-radius: 10px;
+}
+.student-id h5{
+    padding: 10px;
+    background: orange;
+    color:#fff;
+    border-radius: 10px;
+}

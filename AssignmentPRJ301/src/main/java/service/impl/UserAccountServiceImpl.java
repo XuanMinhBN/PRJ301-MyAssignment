@@ -17,8 +17,13 @@ public class UserAccountServiceImpl implements UserAccountService{
     UserAccountDAO userAccountDAO = new UserAccountDAOImpl();
 
     @Override
-    public UserAccount getUserByUsernamePassword(String username, String password) throws Exception {
-        return userAccountDAO.getUserByUsernamePassword(username, password);
+    public UserAccount getLecturerByUsernamePassword(String username, String password) throws Exception {
+        return userAccountDAO.getLecturerByUsernamePassword(username, password);
+    }
+
+    @Override
+    public UserAccount getStudentByUsernamePassword(String username, String password) throws Exception {
+        return userAccountDAO.getStudentByUsernamePassword(username, password);
     }
     
 }

@@ -71,14 +71,17 @@ public class CourseDAOImpl implements CourseDAO, Query {
             while (rs.next()) {
                 Student s = new Student();
                 s.setId(rs.getInt("student_id"));
+                s.setRoll(rs.getString("roll"));
+                s.setName(rs.getNString("student_name"));
+
+                StudentAndCourse sc = new StudentAndCourse();
+                sc.setStudentId(s);
                 
                 Course c = new Course();
                 c.setId(rs.getInt("course_id"));
                 c.setName(rs.getString("course_name"));
-
-                StudentAndCourse sc = new StudentAndCourse();
+                
                 sc.setCourseId(c);
-                sc.setStudentId(s);
 
                 Subject sub = new Subject();
                 sub.setId(rs.getInt("subject_id"));
@@ -87,6 +90,8 @@ public class CourseDAOImpl implements CourseDAO, Query {
 
                 Semester sem = new Semester();
                 sem.setId(rs.getInt("semester_id"));
+                sem.setSeason(rs.getString("season"));
+                sem.setYear(rs.getInt("semester_year"));
                 c.setSemester(sem);
 
                 courses.add(c);

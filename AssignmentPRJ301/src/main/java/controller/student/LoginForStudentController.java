@@ -46,13 +46,13 @@ public class LoginForStudentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter("usernameS");
+        String password = request.getParameter("passwordS");
 
         UserAccountService db = new UserAccountServiceImpl();
         UserAccount user;
         try {
-            user = db.getUserByUsernamePassword(username, password);
+            user = db.getStudentByUsernamePassword(username, password);
             if (user != null) {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("/AssignmentPRJ301/student/view?student_id="+user.getStudent().getId());

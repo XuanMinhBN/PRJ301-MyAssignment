@@ -43,6 +43,7 @@ public class StudentViewController extends BaseRequiredStudentAuthenticationCont
             System.out.println(ex.getMessage());
         }
         request.setAttribute("course", courses);
+        request.setAttribute("student",student);
         request.getRequestDispatcher("../view/studentUI/student-view.jsp").forward(request, response);
     }
 

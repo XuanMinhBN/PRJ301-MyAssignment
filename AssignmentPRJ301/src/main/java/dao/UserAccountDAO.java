@@ -11,5 +11,7 @@ import entity.UserAccount;
  * @author admin
  */
 public interface UserAccountDAO {
-    UserAccount getUserByUsernamePassword(String username, String password) throws Exception;
+    UserAccount getLecturerByUsernamePassword(String username, String password) throws Exception;
+    
+    UserAccount getStudentByUsernamePassword(String username, String password) throws Exception;
 }

@@ -62,6 +62,11 @@ public interface Query {
             + "JOIN semester se\n"
             + "ON c.semester_id = se.semester_id\n"
             + "WHERE se.active = 1 AND course_id = ?";
+    String GET_ASSESSMENT_FOR_SUBJECT = "SELECT a.assesment_id, a.assesment_name, a.weight_mark, a.subject_id, sub.subject_name \n"
+            + "FROM assesment a\n"
+            + "JOIN subjects sub\n"
+            + "ON a.subject_id = sub.subject_id\n"
+            + "WHERE sub.subject_id = ?";
 
     //Query for ExamDAO
     String GET_EXAMS = "SELECT e.exam_id,e.start_time,e.duration,a.assesment_id,a.assesment_name,a.weight_mark FROM exams e INNER JOIN assesment a ON a.assesment_id = e.assesment_id\n"
@@ -93,4 +98,7 @@ public interface Query {
     String SELECT_STUDENT = "SELECT s.student_id, s.student_name FROM student s INNER JOIN student_and_course sc ON sc.student_id = s.student_id\n"
             + "				INNER JOIN course c ON c.course_id = sc.course_id\n"
             + "				WHERE c.course_id = ?";
+
+    //Query for SubjectDAO
+    String SELECT_ALL_SUBJECT = "SELECT * FROM subjects";
 }

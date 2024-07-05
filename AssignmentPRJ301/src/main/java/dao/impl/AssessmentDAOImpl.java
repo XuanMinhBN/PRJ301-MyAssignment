@@ -95,5 +95,35 @@ public class AssessmentDAOImpl implements AssessmentDAO, Query{
         }
         return assessmentList;
     }
+
+    @Override
+    public ArrayList<Assessment> getAssessmentForSubject(int subjectId) throws Exception {
+        ArrayList<Assessment> assessmentList = new ArrayList<>();
+        try(
+            Connection connection = SQLConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(GET_ASSESSMENT_FOR_SUBJECT)
+            ){
+            ps.setInt(1, subjectId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                Assessment a = new Assessment();
+                a.setId(rs.getInt("assesment_id"));
+                a.setName(rs.getString("assesment_name"));
+                a.setWeight(rs.getFloat("weight_mark"));
+                
+                Subject sub= new Subject();
+                sub.setId(rs.getInt("subject_id"));
+                sub.setName(rs.getString("subject_name"));
+                a.setSubject(sub);
+                
+                assessmentList.add(a);
+                
+            }
+        }catch(Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+        return assessmentList;
+    }
     
 }

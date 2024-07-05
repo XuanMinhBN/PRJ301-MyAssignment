@@ -19,8 +19,7 @@
                     <th></th>
                     <c:forEach items="${requestScope.assessments}" var="e">
                         <th>
-                            ${e.name}
-                            ${e.exam.date} - ${e.weight}
+                            ${e.name} - ${e.weight}
                         </th>
                     </c:forEach>
                 </tr>

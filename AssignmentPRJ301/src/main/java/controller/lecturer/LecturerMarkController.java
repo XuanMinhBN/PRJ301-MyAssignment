@@ -45,23 +45,23 @@ public class LecturerMarkController extends BaseRequiredLecturerAuthenticationCo
         StudentService stuDB = new StudentServiceImpl();
         ExamService examDB = new ExamServiceImpl();
         GradeService gradeDB = new GradeServiceImpl();
-        String[] raw_examIds = request.getParameterValues("exam_id");
-        if (raw_examIds.length == 0) {
+        String[] raw_assessmentIds = request.getParameterValues("assesment_id");
+        if (raw_assessmentIds.length == 0) {
             response.getWriter().println("You must select at least one exam");
         } else {
             int courseId = Integer.parseInt(request.getParameter("course_id"));
             ArrayList<Student> students;
             ArrayList<Assessment> assessments;
-            ArrayList<Exam> exams;
+//            ArrayList<Exam> exams;
             ArrayList<Grade> grades;
             try {
                 students = stuDB.getStudentsByCourse(courseId);
-                int[] examIds = new int[raw_examIds.length];
-                for (int i = 0; i < raw_examIds.length; i++) {
-                    examIds[i] = Integer.parseInt(raw_examIds[i]);
+                int[] assessmentIds = new int[raw_assessmentIds.length];
+                for (int i = 0; i < raw_assessmentIds.length; i++) {
+                    assessmentIds[i] = Integer.parseInt(raw_assessmentIds[i]);
                 }
-                assessments = examDB.getAssessmentTable(examIds);
-                grades = gradeDB.getGradesByEids(examIds);
+                assessments = examDB.getAssessmentTable(assessmentIds);
+                grades = gradeDB.getGradesByEids(assessmentIds);
                 request.setAttribute("students", students);
                 request.setAttribute("assessments", assessments);
 //                request.setAttribute("exams", exams);

@@ -5,7 +5,6 @@
 package controller.lecturer;
 
 import controller.authentication.BaseRequiredLecturerAuthenticationController;
-import entity.Assessment;
 import entity.Exam;
 import entity.Grade;
 import entity.Lecturer;
@@ -45,26 +44,24 @@ public class LecturerMarkController extends BaseRequiredLecturerAuthenticationCo
         StudentService stuDB = new StudentServiceImpl();
         ExamService examDB = new ExamServiceImpl();
         GradeService gradeDB = new GradeServiceImpl();
-        String[] raw_assessmentIds = request.getParameterValues("assesment_id");
+        String[] raw_assessmentIds = request.getParameterValues("exam_id");
         if (raw_assessmentIds.length == 0) {
             response.getWriter().println("You must select at least one exam");
         } else {
             int courseId = Integer.parseInt(request.getParameter("course_id"));
             ArrayList<Student> students;
-            ArrayList<Assessment> assessments;
-//            ArrayList<Exam> exams;
+            ArrayList<Exam> exams;
             ArrayList<Grade> grades;
             try {
                 students = stuDB.getStudentsByCourse(courseId);
-                int[] assessmentIds = new int[raw_assessmentIds.length];
+                int[] examIds = new int[raw_assessmentIds.length];
                 for (int i = 0; i < raw_assessmentIds.length; i++) {
-                    assessmentIds[i] = Integer.parseInt(raw_assessmentIds[i]);
+                    examIds[i] = Integer.parseInt(raw_assessmentIds[i]);
                 }
-                assessments = examDB.getAssessmentTable(assessmentIds);
-                grades = gradeDB.getGradesByEids(assessmentIds);
+                exams = examDB.getExamsByEids(examIds);
+                grades = gradeDB.getGradesByEids(examIds);
                 request.setAttribute("students", students);
-                request.setAttribute("assessments", assessments);
-//                request.setAttribute("exams", exams);
+                request.setAttribute("exams", exams);
                 request.setAttribute("grades", grades);
             } catch (Exception ex) {
                 System.out.println(ex);

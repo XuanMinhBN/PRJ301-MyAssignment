@@ -6,7 +6,6 @@ package service.impl;
 
 import dao.ExamDAO;
 import dao.impl.ExamDAOImpl;
-import entity.Assessment;
 import entity.Exam;
 import java.util.ArrayList;
 import service.ExamService;
@@ -24,8 +23,8 @@ public class ExamServiceImpl implements ExamService{
     }
 
     @Override
-    public ArrayList<Assessment> getAssessmentTable(int[] assessmentId) throws Exception {
-        return examDAO.getAssessmentTable(assessmentId);
+    public void insertExam(Exam exam) throws Exception {
+        examDAO.insertExam(exam);
     }
     
 }

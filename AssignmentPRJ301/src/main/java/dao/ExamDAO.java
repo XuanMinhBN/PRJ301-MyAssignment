@@ -4,7 +4,6 @@
  */
 package dao;
 
-import entity.Assessment;
 import entity.Exam;
 import java.util.ArrayList;
 
@@ -15,5 +14,5 @@ import java.util.ArrayList;
 public interface ExamDAO {
     ArrayList<Exam> getExamsByEids(int[] examIds) throws Exception;
     
-    ArrayList<Assessment> getAssessmentTable(int[] assessmentId) throws Exception;
+    void insertExam(Exam exam) throws Exception;
 }

@@ -5,7 +5,6 @@
 package controller.lecturer;
 
 import controller.authentication.BaseRequiredLecturerAuthenticationController;
-import entity.Assessment;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -63,15 +62,12 @@ public class LecturerViewController extends BaseRequiredLecturerAuthenticationCo
             throws ServletException, IOException {
         int courseId = Integer.parseInt(request.getParameter("course_id"));
         AssessmentService db = new AssessmentServiceImpl();
-        ArrayList<Assessment> assessList = null;
         ArrayList<Exam> examList = null;
         try {
-            assessList = db.getAssessment(courseId);
             examList = db.getRelatedExams(courseId);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        request.setAttribute("assessment", assessList);
         request.setAttribute("exams", examList);
         request.getRequestDispatcher("../view/lecturerUI/lecturer-view.jsp").forward(request, response);
     }

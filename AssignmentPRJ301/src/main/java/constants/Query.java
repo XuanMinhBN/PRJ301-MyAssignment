@@ -54,14 +54,6 @@ public interface Query {
             + "INNER JOIN subjects sub ON sub.subject_id = a.subject_id\n"
             + "INNER JOIN course c ON c.subject_id = sub.subject_id\n"
             + "WHERE c.course_id = ?";
-    String GET_ASSESSMENT_FOR_EACH_SUBJECT = "SELECT a.assesment_id, a.assesment_name, a.weight_mark, s.subject_id, s.subject_name, c.course_name, c.lecturer_id  FROM assesment a\n"
-            + "JOIN course c\n"
-            + "ON c.subject_id = a.subject_id\n"
-            + "JOIN subjects s\n"
-            + "ON s.subject_id = c.subject_id\n"
-            + "JOIN semester se\n"
-            + "ON c.semester_id = se.semester_id\n"
-            + "WHERE se.active = 1 AND course_id = ?";
     String GET_ASSESSMENT_FOR_SUBJECT = "SELECT a.assesment_id, a.assesment_name, a.weight_mark, a.subject_id, sub.subject_name \n"
             + "FROM assesment a\n"
             + "JOIN subjects sub\n"
@@ -71,10 +63,14 @@ public interface Query {
     //Query for ExamDAO
     String GET_EXAMS = "SELECT e.exam_id,e.start_time,e.duration,a.assesment_id,a.assesment_name,a.weight_mark FROM exams e INNER JOIN assesment a ON a.assesment_id = e.assesment_id\n"
             + "WHERE (1 > 2)";
-    String GET_ASSESSMENT_ONLY = "SELECT a.assesment_id, a.assesment_name, a.weight_mark, a.subject_id ,e.exam_id, e.duration, e.start_time FROM assesment a\n"
-            + "JOIN exams e\n"
-            + "ON a.assesment_id = e.exam_id\n"
-            + "WHERE (1 > 2)";
+    String INSERT_EXAM = "INSERT INTO [exams] "
+            + "([start_time]"
+            + ",[duration]"
+            + ",[assesment_id])"
+            + "VALUES"
+            + "(?"
+            + ",?"
+            + ",?)";
 
     //Query for GradeDAO
     String GET_GRADE = "SELECT exam_id, student_id, score FROM grades WHERE (1 > 2)";
@@ -87,12 +83,6 @@ public interface Query {
             + "           (?\n"
             + "           ,?\n"
             + "           ,?)";
-    String GET_GRADE_TABLE = "SELECT a.assesment_id, a.assesment_name, a.weight_mark, a.subject_id, e.exam_id, e.duration, e.start_time, g.student_id, g.score FROM assesment a\n"
-            + "LEFT JOIN exams e\n"
-            + "ON a.assesment_id = e.assesment_id\n"
-            + "LEFT JOIN grades g\n"
-            + "ON g.exam_id = e.exam_id\n"
-            + "WHERE (1 > 2)";
 
     //Query for StudentDAO
     String SELECT_STUDENT = "SELECT s.student_id, s.student_name FROM student s INNER JOIN student_and_course sc ON sc.student_id = s.student_id\n"
@@ -101,4 +91,7 @@ public interface Query {
 
     //Query for SubjectDAO
     String SELECT_ALL_SUBJECT = "SELECT * FROM subjects";
+    
+    //Alternative query
+    String IDENTITY_EXAM = "SELECT @@IDENTITY as exam_id";
 }

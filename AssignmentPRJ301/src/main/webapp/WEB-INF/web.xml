@@ -24,6 +24,10 @@
         <servlet-name>SubjectInfoController</servlet-name>
         <servlet-class>controller.subject.SubjectInfoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LecturerAddExamController</servlet-name>
+        <servlet-class>controller.lecturer.LecturerAddExamController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LecturerViewController</servlet-name>
         <url-pattern>/lecturer/view</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>SubjectInfoController</servlet-name>
         <url-pattern>/subject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LecturerAddExamController</servlet-name>
+        <url-pattern>/lecturer/add</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

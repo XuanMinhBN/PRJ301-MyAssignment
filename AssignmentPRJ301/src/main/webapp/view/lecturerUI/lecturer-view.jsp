@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4" style="margin-top: 200px;">
-                    <c:if test="${requestScope.assessment eq null}">
+                    <c:if test="${requestScope.exams eq null}">
                         <form action="view" method="POST"> 
                             <input type="hidden" name="lecturer_id" value="${param.lecturer_id}"/>
                             <h3 class="text-center">Course</h3> <select name="course_id" class="form-select form-select-lg mb-3" aria-label="Large select example">
@@ -38,16 +38,16 @@
                             </div>
                         </form>
                     </c:if>
-                    <c:if test="${requestScope.assessment ne null}">
+                    <c:if test="${requestScope.exams ne null}">
                         <h3 class="text-center">Choose assessments:</h3>
                         <form action="mark" method="GET">
                             <input type="hidden" name="lecturer_id" value="${param.lecturer_id}"/>
                             <input type="hidden" name="course_id" value="${param.course_id}"/>
-                            <c:forEach items="${requestScope.assessment}" var="a">
+                            <c:forEach items="${requestScope.exams}" var="e">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="${a.id}" id="flexCheckDefault" name="assesment_id">
+                                    <input class="form-check-input" type="checkbox" value="${e.id}" id="flexCheckDefault" name="exam_id">
                                     <label class="form-check-label" for="flexCheckDefault">
-                                        ${a.name} - ${a.subject.name} 
+                                        ${e.assessment.name} - ${e.assessment.subject.name}
                                     </label>
                                 </div>
                             </c:forEach>

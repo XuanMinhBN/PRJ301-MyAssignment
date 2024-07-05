@@ -10,9 +10,12 @@ import dao.ExamDAO;
 import entity.Assessment;
 import entity.Exam;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -55,44 +58,20 @@ public class ExamDAOImpl implements ExamDAO ,Query{
             throw new Exception(ex.getMessage());
         }
         return exams;
-    }
+    }    
 
     @Override
-    public ArrayList<Assessment> getAssessmentTable(int[] assessmentIds) throws Exception {
-        ArrayList<Assessment> assessments = new ArrayList<>();
-        String sql = GET_ASSESSMENT_ONLY;
-        for (int examId : assessmentIds) {
-            sql+= " OR a.assesment_id = ? ";
-        }
+    public void insertExam(Exam exam) throws Exception {
         try(
             Connection connection = SQLConnection.getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql)
+            PreparedStatement ps = connection.prepareStatement(INSERT_EXAM)
             ){
-            for (int i = 0; i < assessmentIds.length; i++) {
-                ps.setInt((i+1), assessmentIds[i]);
-            }
-            ResultSet rs = ps.executeQuery();
-            while(rs.next())
-            {
-                Assessment a = new Assessment();
-                a.setId(rs.getInt("assesment_id"));
-                a.setName(rs.getString("assesment_name"));
-                a.setWeight(rs.getFloat("weight_mark"));
-                
-                Exam exam = new Exam();
-                exam.setId(rs.getInt("exam_id"));
-                exam.setDate(rs.getTimestamp("start_time"));
-                exam.setDuration(rs.getInt("duration"));
-                exam.setAssessment(a);
-                
-                assessments.add(a);
-                
-            }
+            ps.setDate(1, (Date) exam.getDate());
+            ps.setInt(2, exam.getDuration());
+            ps.setObject(3, exam.getAssessment());
+            ps.executeUpdate();
         }catch(Exception ex){
             throw new Exception(ex.getMessage());
         }
-        return assessments;
     }
-    
-    
 }

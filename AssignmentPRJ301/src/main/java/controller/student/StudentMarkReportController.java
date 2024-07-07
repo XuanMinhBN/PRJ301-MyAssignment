@@ -5,16 +5,14 @@
 package controller.student;
 
 import controller.authentication.BaseRequiredStudentAuthenticationController;
+import entity.Grade;
 import entity.Student;
 import entity.UserAccount;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import service.StudentService;
 import service.impl.StudentServiceImpl;
 
@@ -38,13 +36,13 @@ public class StudentMarkReportController extends BaseRequiredStudentAuthenticati
             throws ServletException, IOException {
         StudentService studentService = new StudentServiceImpl();
         int studentId = Integer.parseInt(request.getParameter("student_id"));
-        ArrayList<Student> studentList = null;
+        ArrayList<Grade> gradeList = null;
         try {
-            studentList = studentService.getMarkForStudent(studentId);
+            gradeList = studentService.getMarkForStudent(studentId);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        request.setAttribute("student", studentList);
+        request.setAttribute("grade", gradeList);
         request.setAttribute("aStudent", student);
         request.getRequestDispatcher("../view/studentUI/student-mark-report.jsp").forward(request, response);
     }

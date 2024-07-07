@@ -110,6 +110,17 @@ public interface Query {
     //Query for SubjectDAO
     String SELECT_ALL_SUBJECT = "SELECT * FROM subjects";
 
-    //Alternative query
-    String IDENTITY_EXAM = "SELECT @@IDENTITY as exam_id";
+    //Query to calculate
+    String AVERAGE = "SELECT s.roll, s.student_name, SUM(a.weight_mark*g.score) AS total\n"
+            + "FROM assesment a\n"
+            + "JOIN exams e\n"
+            + "ON a.assesment_id = e.assesment_id\n"
+            + "JOIN grades g\n"
+            + "ON g.exam_id = e.exam_id\n"
+            + "JOIN student s\n"
+            + "ON g.student_id = s.student_id\n"
+            + "JOIN subjects sub\n"
+            + "ON sub.subject_id = a.subject_id\n"
+            + "WHERE s.student_id = ? AND sub.subject_id = ?\n"
+            + "GROUP BY s.roll, s.student_name";
 }

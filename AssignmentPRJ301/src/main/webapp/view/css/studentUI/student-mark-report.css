@@ -6,4 +6,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : 7 Jul 2024, 16:19:59
     Author     : admin
 */
-
+h3{
+    color:#fff;
+    background: lightblue;
+}
+.students-info{
+    display: flex;
+    justify-content: space-evenly;
+}
+.students-name h5{
+    padding: 10px;
+    background: pink;
+    color:#fff;
+    border-radius: 10px;
+}
+.students-id h5{
+    padding: 10px;
+    background: orange;
+    color:#fff;
+    border-radius: 10px;
+}

@@ -4,6 +4,7 @@
  */
 package dao;
 
+import entity.Grade;
 import entity.Student;
 import java.util.ArrayList;
 
@@ -14,5 +15,5 @@ import java.util.ArrayList;
 public interface StudentDAO {
     ArrayList<Student> getStudentsByCourse(int courseId) throws Exception;
     
-    ArrayList<Student> getMarkForStudent(int studentId) throws Exception;
+    ArrayList<Grade> getMarkForStudent(int studentId) throws Exception;
 }

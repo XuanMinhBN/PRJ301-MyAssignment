@@ -6,6 +6,7 @@ package service.impl;
 
 import dao.StudentDAO;
 import dao.impl.StudentDAOImpl;
+import entity.Grade;
 import entity.Student;
 import java.util.ArrayList;
 import service.StudentService;
@@ -23,7 +24,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public ArrayList<Student> getMarkForStudent(int studentId) throws Exception {
+    public ArrayList<Grade> getMarkForStudent(int studentId) throws Exception {
         return studentDAO.getMarkForStudent(studentId);
     }
 }

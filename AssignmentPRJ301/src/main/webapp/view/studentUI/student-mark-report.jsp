@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,15 +24,15 @@
     <body>
         <div class="container">
             <div class="row mt-5">
-                <h3 class="text-center">Information</h3>
+                <h3 class="text-center">Mark Report</h3>
                 <div class="col-3"></div>
                 <div class="col-6 mt-5">
-                    <div class="student-info mb-4">
-                        <div class="student-name text-center">
+                    <div class="students-info mb-4">
+                        <div class="students-name text-center">
                             <h4>Student Name:</h4>
                             <h5>${aStudent.name}</h5>
                         </div>
-                        <div class="student-id text-center">
+                        <div class="students-id text-center">
                             <h4>Student ID:</h4>
                             <h5>${aStudent.roll}</h5>
                         </div>
@@ -43,16 +44,18 @@
                                 <th scope="col">Assessment</th>
                                 <th scope="col">Mark Weight</th>
                                 <th scope="col">Score</th>
+                                <th scope="col">Final Score</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${requestScope.student}" var="s">
-                            <tr>
-                                <th scope="row">${s.grades.exam.assessment.subject.name}</th>
-                                <td>${s.grades.exam.assessment.name}</td>
-                                <td>${s.grades.exam.assessment.weight}</td>
-                                <td>${s.grades.score}</td>
-                            </tr>
+                            <c:forEach items="${requestScope.grade}" var="g">
+                                <tr>
+                                    <th scope="row">${g.exam.assessment.subject.name}</th>
+                                    <td>${g.exam.assessment.name}</td>
+                                    <td>${g.exam.assessment.weight}</td>
+                                    <td>${g.score}</td>
+                                    <td><fmt:formatNumber value="${g.exam.assessment.weight*g.score}" type="number"/></td>
+                                </tr>
                             </c:forEach>
                         </tbody>
                     </table>

@@ -43,8 +43,7 @@ public class StudentDAOImpl implements StudentDAO, Query {
     }
 
     @Override
-    public ArrayList<Student> getMarkForStudent(int studentId) throws Exception {
-        ArrayList<Student> students = new ArrayList<>();
+    public ArrayList<Grade> getMarkForStudent(int studentId) throws Exception {
         ArrayList<Grade> grade = new ArrayList<>();
         try (
                 Connection connection = SQLConnection.getConnection(); PreparedStatement ps = connection.prepareStatement(STUDENT_MARK_REPORT)) {
@@ -62,26 +61,21 @@ public class StudentDAOImpl implements StudentDAO, Query {
                 Exam e = new Exam();
                 e.setId(rs.getInt("exam_id"));
                 e.setAssessment(a);
-
-                Grade g = new Grade();
-                g.setScore(rs.getFloat("score"));
-                g.setExam(e);
                 
-
                 Student s = new Student();
                 s.setId(rs.getInt("student_id"));
                 s.setRoll(rs.getString("roll"));
                 s.setName(rs.getNString("student_name"));
-                
+
+                Grade g = new Grade();
+                g.setScore(rs.getFloat("score"));
+                g.setExam(e);
                 g.setStudent(s);
                 grade.add(g);
-                s.setGrades(grade);
-
-                students.add(s);
             }
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
         }
-        return students;
+        return grade;
     }
 }

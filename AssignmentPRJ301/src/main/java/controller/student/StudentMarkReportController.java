@@ -5,22 +5,24 @@
 package controller.student;
 
 import controller.authentication.BaseRequiredStudentAuthenticationController;
-import entity.Course;
 import entity.Student;
 import entity.UserAccount;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import service.CourseService;
-import service.impl.CourseServiceImpl;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import service.StudentService;
+import service.impl.StudentServiceImpl;
 
 /**
  *
  * @author admin
  */
-public class StudentViewController extends BaseRequiredStudentAuthenticationController {
+public class StudentMarkReportController extends BaseRequiredStudentAuthenticationController {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -34,17 +36,17 @@ public class StudentViewController extends BaseRequiredStudentAuthenticationCont
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount user, Student student)
             throws ServletException, IOException {
-        CourseService db = new CourseServiceImpl();
+        StudentService studentService = new StudentServiceImpl();
         int studentId = Integer.parseInt(request.getParameter("student_id"));
-        ArrayList<Course> courses = null;
+        ArrayList<Student> studentList = null;
         try {
-            courses = db.filterByStudentID(studentId);
+            studentList = studentService.getMarkForStudent(studentId);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        request.setAttribute("course", courses);
-        request.setAttribute("student",student);
-        request.getRequestDispatcher("../view/studentUI/student-view.jsp").forward(request, response);
+        request.setAttribute("student", studentList);
+        request.setAttribute("aStudent", student);
+        request.getRequestDispatcher("../view/studentUI/student-mark-report.jsp").forward(request, response);
     }
 
     /**
@@ -58,6 +60,7 @@ public class StudentViewController extends BaseRequiredStudentAuthenticationCont
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount user, Student student)
             throws ServletException, IOException {
+       
     }
 
     /**

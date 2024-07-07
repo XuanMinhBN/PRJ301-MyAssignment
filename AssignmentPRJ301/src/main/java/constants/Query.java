@@ -59,6 +59,14 @@ public interface Query {
             + "JOIN subjects sub\n"
             + "ON a.subject_id = sub.subject_id\n"
             + "WHERE sub.subject_id = ?";
+    String GET_ASSESSMENT_WITH_COURSE = "SELECT a.assesment_id, a.assesment_name, a.subject_id, c.course_id FROM assesment a\n"
+            + "JOIN course c\n"
+            + "ON a.subject_id = c.subject_id\n"
+            + "WHERE c.course_id = ?";
+    String GET_ASSESSMENT_BY_ID = "SELECT a.assesment_id, a.assesment_name, a.weight_mark ,a.subject_id FROM assesment a\n"
+            + "JOIN subjects sub\n"
+            + "ON a.subject_id = sub.subject_id\n"
+            + "WHERE assesment_id = ?";
 
     //Query for ExamDAO
     String GET_EXAMS = "SELECT e.exam_id,e.start_time,e.duration,a.assesment_id,a.assesment_name,a.weight_mark FROM exams e INNER JOIN assesment a ON a.assesment_id = e.assesment_id\n"
@@ -88,10 +96,20 @@ public interface Query {
     String SELECT_STUDENT = "SELECT s.student_id, s.student_name FROM student s INNER JOIN student_and_course sc ON sc.student_id = s.student_id\n"
             + "				INNER JOIN course c ON c.course_id = sc.course_id\n"
             + "				WHERE c.course_id = ?";
+    String STUDENT_MARK_REPORT = "SELECT s.student_id, s.roll, s.student_name, sub.subject_name, a.assesment_name, a.weight_mark, g.score, e.exam_id FROM student s\n"
+            + "JOIN grades g\n"
+            + "ON s.student_id = g.student_id\n"
+            + "JOIN exams e\n"
+            + "ON e.exam_id = g.exam_id\n"
+            + "JOIN assesment a\n"
+            + "ON e.assesment_id = a.assesment_id\n"
+            + "JOIN subjects sub\n"
+            + "ON sub.subject_id = a.subject_id\n"
+            + "WHERE s.student_id = ?";
 
     //Query for SubjectDAO
     String SELECT_ALL_SUBJECT = "SELECT * FROM subjects";
-    
+
     //Alternative query
     String IDENTITY_EXAM = "SELECT @@IDENTITY as exam_id";
 }

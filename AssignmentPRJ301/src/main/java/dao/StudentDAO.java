@@ -13,4 +13,6 @@ import java.util.ArrayList;
  */
 public interface StudentDAO {
     ArrayList<Student> getStudentsByCourse(int courseId) throws Exception;
+    
+    ArrayList<Student> getMarkForStudent(int studentId) throws Exception;
 }

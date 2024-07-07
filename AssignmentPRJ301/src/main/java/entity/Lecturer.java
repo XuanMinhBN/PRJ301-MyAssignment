@@ -5,38 +5,23 @@
 package entity;
 
 import java.util.ArrayList;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
- * @author X1 Nano
+ * @author admin
  */
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Lecturer {
     private int id;
     private String name;
     private ArrayList<Course> courses = new ArrayList<>();
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ArrayList<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(ArrayList<Course> courses) {
-        this.courses = courses;
-    }
-    
 }

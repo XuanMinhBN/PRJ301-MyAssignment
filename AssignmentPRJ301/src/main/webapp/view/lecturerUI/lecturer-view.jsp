@@ -53,6 +53,9 @@
                             </c:forEach>
                             <input type="submit" class="btn btn-outline-success" value="Take"/>
                         </form>
+                        <div class="mt-2">
+                            <a href="/AssignmentPRJ301/lecturer/add?lecturer_id=${param.lecturer_id}&course_id=${param.course_id}" type="button" class="btn btn-outline-secondary">Add Exam</a>
+                        </div>
                     </c:if>
                 </div>
                 <div class="col-4"></div>

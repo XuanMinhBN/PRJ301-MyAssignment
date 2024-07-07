@@ -13,9 +13,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -68,7 +66,7 @@ public class ExamDAOImpl implements ExamDAO ,Query{
             ){
             ps.setDate(1, (Date) exam.getDate());
             ps.setInt(2, exam.getDuration());
-            ps.setObject(3, exam.getAssessment());
+            ps.setInt(3, exam.getAssessment().getId());
             ps.executeUpdate();
         }catch(Exception ex){
             throw new Exception(ex.getMessage());

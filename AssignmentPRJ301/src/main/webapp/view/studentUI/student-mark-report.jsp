@@ -1,6 +1,6 @@
 <%-- 
-    Document   : student-view
-    Created on : 3 Jul 2024, 07:23:24
+    Document   : student-mark-report
+    Created on : 7 Jul 2024, 14:11:49
     Author     : admin
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Syllabus</title>
+        <title>Mark Report</title>
         <!--Bootstrap CSS-->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -18,7 +18,7 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
             />
-        <link rel="stylesheet" href="../view/css/studentUI/student-view.css"/>
+        <link rel="stylesheet" href="../view/css/studentUI/student-mark-report.css"/>
     </head>
     <body>
         <div class="container">
@@ -29,34 +29,30 @@
                     <div class="student-info mb-4">
                         <div class="student-name text-center">
                             <h4>Student Name:</h4>
-                            <h5>${student.name}</h5>
+                            <h5>${aStudent.name}</h5>
                         </div>
                         <div class="student-id text-center">
                             <h4>Student ID:</h4>
-                            <h5>${student.roll}</h5>
+                            <h5>${aStudent.roll}</h5>
                         </div>
                     </div>
-                    <table class="table table-bordered border-info">
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Season</th>
-                                <th scope="col">Year</th>
-                                <th scope="col">Class</th>
                                 <th scope="col">Subject</th>
-                                <th scope="col">More Info</th>
+                                <th scope="col">Assessment</th>
+                                <th scope="col">Mark Weight</th>
+                                <th scope="col">Score</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${requestScope.course}" var="c">
-                                <tr>
-                                    <th scope="row">${c.semester.season}</th>
-                                    <td>${c.semester.year}</td>
-                                    <td>${c.name}</td>
-                                    <td>${c.subject.name}</td>
-                                    <td>
-                                        <a href="/AssignmentPRJ301/student/mark?student_id=${student.id}" type="button" class="btn btn-outline-info">Mark Report</a>
-                                    </td>
-                                </tr>
+                            <c:forEach items="${requestScope.student}" var="s">
+                            <tr>
+                                <th scope="row">${s.grades.exam.assessment.subject.name}</th>
+                                <td>${s.grades.exam.assessment.name}</td>
+                                <td>${s.grades.exam.assessment.weight}</td>
+                                <td>${s.grades.score}</td>
+                            </tr>
                             </c:forEach>
                         </tbody>
                     </table>

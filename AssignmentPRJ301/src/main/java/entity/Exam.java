@@ -6,56 +6,25 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
- * @author X1 Nano
+ * @author admin
  */
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Exam {
     private int id;
     private Date date;
     private int duration;
     private Assessment assessment;
     private ArrayList<Grade> grades = new ArrayList<>();
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public Assessment getAssessment() {
-        return assessment;
-    }
-
-    public void setAssessment(Assessment assessment) {
-        this.assessment = assessment;
-    }
-
-    public ArrayList<Grade> getGrades() {
-        return grades;
-    }
-
-    public void setGrades(ArrayList<Grade> grades) {
-        this.grades = grades;
-    }
-    
 }

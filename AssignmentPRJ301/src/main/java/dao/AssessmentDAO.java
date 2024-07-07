@@ -16,4 +16,8 @@ public interface AssessmentDAO {
     ArrayList<Exam> getRelatedExams(int courseId) throws Exception;
     
     ArrayList<Assessment> getAssessmentForSubject(int subjectId) throws Exception;
+    
+    ArrayList<Assessment> getAssessmentWithCourse(int courseId) throws Exception;
+    
+    Assessment getAssessmentById(int assessmentId) throws Exception;
 }

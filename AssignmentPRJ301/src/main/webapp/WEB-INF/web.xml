@@ -28,6 +28,10 @@
         <servlet-name>LecturerAddExamController</servlet-name>
         <servlet-class>controller.lecturer.LecturerAddExamController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StudentMarkReportController</servlet-name>
+        <servlet-class>controller.student.StudentMarkReportController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LecturerViewController</servlet-name>
         <url-pattern>/lecturer/view</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>LecturerAddExamController</servlet-name>
         <url-pattern>/lecturer/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentMarkReportController</servlet-name>
+        <url-pattern>/student/mark</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

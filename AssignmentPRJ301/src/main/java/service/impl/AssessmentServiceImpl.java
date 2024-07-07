@@ -27,4 +27,14 @@ public class AssessmentServiceImpl implements AssessmentService{
     public ArrayList<Assessment> getAssessmentForSubject(int subjectId) throws Exception {
         return assessmentDAO.getAssessmentForSubject(subjectId);
     }
+
+    @Override
+    public ArrayList<Assessment> getAssessmentWithCourse(int courseId) throws Exception {
+        return assessmentDAO.getAssessmentWithCourse(courseId);
+    }
+
+    @Override
+    public Assessment getAssessmentById(int assessmentId) throws Exception {
+        return assessmentDAO.getAssessmentById(assessmentId);
+    }
 }

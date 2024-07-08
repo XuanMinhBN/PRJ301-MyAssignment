@@ -13,5 +13,7 @@ import java.util.ArrayList;
  */
 public interface GradeDAO {
     ArrayList<Grade> getGradesByEids(int[] eids) throws Exception;
-     void saveGradesByCourse(int courseId, ArrayList<Grade> grades) throws Exception;
+    
+    void saveGradesByCourse(int courseId, ArrayList<Grade> grades) throws Exception;
+
 }

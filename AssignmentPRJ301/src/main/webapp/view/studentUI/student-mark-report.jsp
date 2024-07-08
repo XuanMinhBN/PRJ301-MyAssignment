@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,13 +53,46 @@
                                 <tr>
                                     <th scope="row">${g.exam.assessment.subject.name}</th>
                                     <td>${g.exam.assessment.name}</td>
-                                    <td>${g.exam.assessment.weight}</td>
+                                    <td><fmt:formatNumber value="${g.exam.assessment.weight}" type="percent"/></td>
                                     <td>${g.score}</td>
                                     <td><fmt:formatNumber value="${g.exam.assessment.weight*g.score}" type="number"/></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
+                    <sql:setDataSource var="dataSource"
+                                       driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                                       url="jdbc:sqlserver://localhost\\MSSQLSERVER01:1433;databaseName=PRJ301_SU23_DB;encrypt=true;trustServerCertificate=true;"
+                                       user="sa"
+                                       password="12345678" />
+                    <sql:query var="result" dataSource="${dataSource}">
+                        SELECT s.roll, s.student_name, SUM(a.weight_mark * g.score) AS total
+                        FROM assesment a
+                        JOIN exams e ON a.assesment_id = e.assesment_id
+                        JOIN grades g ON g.exam_id = e.exam_id
+                        JOIN student s ON g.student_id = s.student_id
+                        JOIN subjects sub ON sub.subject_id = a.subject_id
+                        WHERE s.student_id = ?
+                        AND sub.subject_id = ?
+                        GROUP BY s.roll, s.student_name
+                        <sql:param value="${studentId}" />
+                        <sql:param value="${subjectId}" />
+                    </sql:query>
+                    <div class="result-view">
+                        <c:forEach var="row" items="${result.rows}">
+                            <h5 class="text-center">Total Mark: ${row.total}</h5>
+                            <h5 class="<c:choose>
+                                    <c:when test="${row.total > 5}">text-success text-center</c:when>
+                                    <c:otherwise>text-danger text-center</c:otherwise>
+                                </c:choose>">
+                                Status:
+                                <c:choose>
+                                    <c:when test="${row.total > 5}">Passed</c:when>
+                                    <c:otherwise>Not Passed</c:otherwise>
+                                </c:choose>
+                            </h5>
+                        </c:forEach>
+                    </div>
                 </div>
                 <div class="col-3"></div>
             </div>

@@ -26,5 +26,5 @@ public class GradeServiceImpl implements GradeService{
     public void saveGradesByCourse(int courseId, ArrayList<Grade> grades) throws Exception {
         gradeDAO.saveGradesByCourse(courseId, grades);
     }
-    
+
 }

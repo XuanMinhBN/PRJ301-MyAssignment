@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,7 +50,7 @@
                                     <tr>
                                     <th scope="row">${a.subject.name}</th>
                                     <td>${a.name}</td>
-                                    <td>${a.weight}</td>
+                                    <td><fmt:formatNumber value="${a.weight}" type="percent"/></td>
                                 </tr>
                                 </c:forEach> 
                             </tbody>

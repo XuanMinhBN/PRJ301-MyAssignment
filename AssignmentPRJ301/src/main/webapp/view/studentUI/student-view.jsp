@@ -54,7 +54,7 @@
                                     <td>${c.name}</td>
                                     <td>${c.subject.name}</td>
                                     <td>
-                                        <a href="/AssignmentPRJ301/student/mark?student_id=${student.id}" type="button" class="btn btn-outline-info">Mark Report</a>
+                                        <a href="/AssignmentPRJ301/student/mark?student_id=${student.id}&subject_id=${c.subject.id}" type="button" class="btn btn-outline-info">Mark Report</a>
                                     </td>
                                 </tr>
                             </c:forEach>

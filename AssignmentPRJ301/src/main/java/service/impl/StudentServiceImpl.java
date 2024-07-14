@@ -27,4 +27,9 @@ public class StudentServiceImpl implements StudentService{
     public ArrayList<Grade> getMarkForStudent(int studentId) throws Exception {
         return studentDAO.getMarkForStudent(studentId);
     }
+
+    @Override
+    public ArrayList<Student> getAllStudent() throws Exception {
+        return studentDAO.getAllStudent();
+    }
 }

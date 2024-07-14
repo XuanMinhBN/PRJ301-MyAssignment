@@ -101,4 +101,56 @@ public class CourseDAOImpl implements CourseDAO, Query {
         }
         return courses;
     }
+
+    @Override
+    public void insertNewCourse(Course course) throws Exception {
+        try(
+            Connection connection = SQLConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(INSERT_NEW_COURSE)
+            ){
+            ps.setString(1, course.getName());
+            ps.setInt(2, course.getLecturer().getId());
+            ps.setInt(3, course.getSubject().getId());
+            ps.setInt(4, course.getSemester().getId());
+            ps.executeUpdate();
+        }catch(Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void insertStudentIntoCourse(int student, int course) throws Exception {
+        try(
+            Connection connection = SQLConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(INSERT_STUDENT_IN_COURSE)
+            ){
+            ps.setInt(1, student);
+            ps.setInt(2, course);
+            ps.executeUpdate();
+        }catch(Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Course getCourseById(int id) throws Exception {
+        try (
+            Connection connection = SQLConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(GET_COURSE_BY_ID)
+        ) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Course course = new Course();
+                course.setId(rs.getInt("course_id"));
+                course.setName(rs.getString("course_name"));
+                return course;
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+        return null;
+    }
+    
+    
 }

@@ -49,9 +49,9 @@ public abstract class BaseRequiredTrainingAuthenticationController extends HttpS
         }
     }
 
-    protected abstract void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount user, Training student)
+    protected abstract void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount user, Training training)
             throws ServletException, IOException;
 
-    protected abstract void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount user, Training student)
+    protected abstract void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount user, Training training)
             throws ServletException, IOException;
 }

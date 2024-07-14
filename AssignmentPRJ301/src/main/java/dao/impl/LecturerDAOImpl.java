@@ -6,8 +6,8 @@ package dao.impl;
 
 import connection.SQLConnection;
 import constants.Query;
-import dao.SubjectDAO;
-import entity.Subject;
+import dao.LecturerDAO;
+import entity.Lecturer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,39 +17,39 @@ import java.util.ArrayList;
  *
  * @author admin
  */
-public class SubjectDAOImpl implements SubjectDAO, Query{
+public class LecturerDAOImpl implements LecturerDAO, Query{
 
     @Override
-    public ArrayList<Subject> getAllSubject() throws Exception {
-        ArrayList<Subject> subjectList = new ArrayList<>();
+    public ArrayList<Lecturer> getAll() throws Exception {
+        ArrayList<Lecturer> lecturerList = new ArrayList<>();
         try(
             Connection connection = SQLConnection.getConnection();
-            PreparedStatement ps = connection.prepareStatement(SELECT_ALL_SUBJECT)
+            PreparedStatement ps = connection.prepareStatement(SELECT_LECTURER_ONLY)
             ){
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Subject subject = new Subject();
-                subject.setId(rs.getInt("subject_id"));
-                subject.setName(rs.getString("subject_name"));
-                subjectList.add(subject);
+                Lecturer lecturer = new Lecturer();
+                lecturer.setId(rs.getInt("lecturer_id"));
+                lecturer.setName(rs.getString("lecturer_name"));
+                lecturerList.add(lecturer);
             }
         }
-        return subjectList;
+        return lecturerList;
     }
 
     @Override
-    public Subject getSubjectById(int id) throws Exception {
+    public Lecturer getLecturerById(int id) throws Exception {
         try (
             Connection connection = SQLConnection.getConnection();
-            PreparedStatement ps = connection.prepareStatement(GET_SUBJECT_BY_ID)
+            PreparedStatement ps = connection.prepareStatement(GET_LECTURER_BY_ID)
         ) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Subject subject = new Subject();
-                subject.setId(rs.getInt("subject_id"));
-                subject.setName(rs.getString("subject_name"));
-                return subject;
+                Lecturer lecturer = new Lecturer();
+                lecturer.setId(rs.getInt("lecturer_id"));
+                lecturer.setName(rs.getString("lecturer_name"));
+                return lecturer;
             }
         } catch (Exception e) {
             throw new Exception(e.getMessage());

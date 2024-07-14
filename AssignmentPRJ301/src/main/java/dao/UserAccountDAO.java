@@ -14,4 +14,6 @@ public interface UserAccountDAO {
     UserAccount getLecturerByUsernamePassword(String username, String password) throws Exception;
     
     UserAccount getStudentByUsernamePassword(String username, String password) throws Exception;
+    
+    UserAccount getTrainingByUsernamePassword(String username, String password) throws Exception;
 }

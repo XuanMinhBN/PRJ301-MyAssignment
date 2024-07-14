@@ -4,18 +4,19 @@
  */
 package dao;
 
-import entity.Grade;
-import entity.Student;
+import entity.Semester;
 import java.util.ArrayList;
 
 /**
  *
  * @author admin
  */
-public interface StudentDAO {
-    ArrayList<Student> getStudentsByCourse(int courseId) throws Exception;
+public interface SemesterDAO {
+    ArrayList<Semester> getAll() throws Exception;
     
-    ArrayList<Grade> getMarkForStudent(int studentId) throws Exception;
+    void addNewSemester(Semester semester) throws Exception;
     
-    ArrayList<Student> getAllStudent() throws Exception;
+    Semester getSemesterById(int id) throws Exception;
+    
+    void updateSemester() throws Exception;
 }

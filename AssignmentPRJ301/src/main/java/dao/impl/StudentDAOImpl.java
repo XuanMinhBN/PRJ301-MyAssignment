@@ -78,4 +78,23 @@ public class StudentDAOImpl implements StudentDAO, Query {
         }
         return grade;
     }
+
+    @Override
+    public ArrayList<Student> getAllStudent() throws Exception {
+        ArrayList<Student> studentList = new ArrayList<>();
+        try(
+            Connection connection = SQLConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(SELECT_ALL_STUDENT)
+            ){
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setId(rs.getInt("student_id"));
+                student.setRoll(rs.getString("roll"));
+                student.setName(rs.getString("student_name"));
+                studentList.add(student);
+            }
+        }
+        return studentList;
+    }
 }

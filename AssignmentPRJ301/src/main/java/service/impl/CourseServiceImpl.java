@@ -26,4 +26,19 @@ public class CourseServiceImpl implements CourseService{
     public ArrayList<Course> filterByStudentID(int studentId) throws Exception {
         return courseDAO.filterByStudentID(studentId);
     }
+
+    @Override
+    public void insertNewCourse(Course course) throws Exception {
+        courseDAO.insertNewCourse(course);
+    }
+
+    @Override
+    public void insertStudentIntoCourse(int student, int course) throws Exception {
+        courseDAO.insertStudentIntoCourse(student, course);
+    }
+
+    @Override
+    public Course getCourseById(int id) throws Exception {
+        return courseDAO.getCourseById(id);
+    }
 }

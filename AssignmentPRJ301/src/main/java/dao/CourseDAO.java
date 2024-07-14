@@ -15,4 +15,10 @@ public interface CourseDAO {
     ArrayList<Course> filterByLecturerID(int lecturerId) throws Exception;
     
     ArrayList<Course> filterByStudentID(int studentId) throws Exception;
+    
+    void insertNewCourse(Course course) throws Exception;
+    
+    void insertStudentIntoCourse(int student, int course) throws Exception;
+    
+    Course getCourseById(int id) throws Exception;
 }

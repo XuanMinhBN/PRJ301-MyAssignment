@@ -21,15 +21,44 @@
     </head>
     <body>
         <div class="container">
-            <div class="row">
+            <div class="row mt-5">
+                <h3 class="text-center">Add new Course</h3>
                 <div class="col-12">
-                    <form action="action">
-                        
+                    <form action="addCourse" method="POST">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" name="course">
+                            <label for="floatingInput">Course Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="lecturer">
+                                <c:forEach items="${requestScope.lecList}" var="l">
+                                    <option value="${l.id}">${l.name}</option>
+                                </c:forEach>
+                            </select>
+                            <label for="floatingSelect">Lecturer</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="floatingSelect1" aria-label="Floating label select example" name="subject">
+                                <c:forEach items="${requestScope.subList}" var="sub">
+                                    <option value="${sub.id}">${sub.name}</option>
+                                </c:forEach>
+                            </select>
+                            <label for="floatingSelect1">Subject</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="floatingSelect2" aria-label="Floating label select example" name="semester">
+                                <c:forEach items="${requestScope.seList}" var="se">
+                                    <option value="${se.id}">${se.season}${se.year}</option>
+                                </c:forEach>
+                            </select>
+                            <label for="floatingSelect2">Semester</label>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success">Add new</button>
                     </form>
                 </div>
             </div>
         </div>
-        
+
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

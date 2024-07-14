@@ -27,6 +27,14 @@ public interface Query {
             + "LEFT JOIN student s \n"
             + "ON sa.student_id = s.student_id\n"
             + "WHERE u.username = ? AND u.[password] = ?";
+    String GET_TRAINING_ACCOUNT
+            = "SELECT u.username,u.displayname,t.training_id,t.training_name\n"
+            + "FROM user_account u \n"
+            + "LEFT JOIN training_account ta \n"
+            + "ON ta.username = u.username AND ta.active = 1\n"
+            + "LEFT JOIN training t\n"
+            + "ON ta.training_id = t.training_id\n"
+            + "WHERE u.username = ? AND u.[password] = ?";
 
     //Query for CourseDAO
     String GET_LECTURER_OF_COURSE = "SELECT c.course_id, c.course_name, c.subject_id, sub.subject_name, c.lecturer_id, s.semester_id, s.season, s.active, s.semester_year \n"
@@ -46,6 +54,12 @@ public interface Query {
             + "JOIN semester se\n"
             + "ON c.semester_id = se.semester_id\n"
             + "WHERE se.active = 1 AND s.student_id = ?";
+    String INSERT_NEW_COURSE = "INSERT INTO course\n"
+            + "VALUES (?,?,?,?);";
+    String INSERT_STUDENT_IN_COURSE = "INSERT INTO student_and_course\n"
+            + "VALUES (?,?);";
+    String GET_COURSE_BY_ID = "SELECT course_id, course_name FROM course\n"
+            + "WHERE course_id = ?";
 
     //Query for AssessmentDAO
     String GET_ASSESSMENT_TABLE = "SELECT a.assesment_id, a.assesment_name, a.weight_mark, sub.subject_id, sub.subject_name, e.exam_id, e.start_time, e.duration\n"
@@ -106,9 +120,28 @@ public interface Query {
             + "JOIN subjects sub\n"
             + "ON sub.subject_id = a.subject_id\n"
             + "WHERE s.student_id = ?";
+    String SELECT_ALL_STUDENT = "SELECT * FROM student ";
+
+    //Query for LecturerDAO
+    String SELECT_LECTURER_ONLY = "SELECT * FROM lecturer";
+    String GET_LECTURER_BY_ID = "SELECT * FROM lecturer \n"
+            + "WHERE lecturer_id = ?";
 
     //Query for SubjectDAO
     String SELECT_ALL_SUBJECT = "SELECT * FROM subjects";
+    String GET_SUBJECT_BY_ID = "SELECT * FROM subjects \n"
+            + "WHERE subject_id = ?";
+
+    //Query for SemesterDAO
+    String SELECT_CURRENT_SEMESTER = "SELECT * FROM semester \n"
+            + "ORDER BY semester_id DESC";
+    String INSERT_NEW_SEMESTER = "INSERT INTO semester\n"
+            + "VALUES (?,?,?);";
+    String GET_SEMESTER_BY_ID = "SELECT * FROM semester \n"
+            + "WHERE semester_id = ?";
+    String UPDATE_SEMESTER = "UPDATE semester\n"
+            + "SET active = 0\n"
+            + "WHERE active = 1";
 
     //Query to calculate
     String AVERAGE = "SELECT s.roll, s.student_name, SUM(a.weight_mark*g.score) AS total\n"

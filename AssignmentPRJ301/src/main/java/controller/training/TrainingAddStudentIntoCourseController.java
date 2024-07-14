@@ -6,9 +6,7 @@ package controller.training;
 
 import controller.authentication.BaseRequiredTrainingAuthenticationController;
 import entity.Course;
-import entity.Lecturer;
-import entity.Semester;
-import entity.Subject;
+import entity.Student;
 import entity.Training;
 import entity.UserAccount;
 import java.io.IOException;
@@ -16,27 +14,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import service.CourseService;
-import service.LecturerService;
-import service.SemesterService;
-import service.SubjectService;
+import service.StudentService;
 import service.impl.CourseServiceImpl;
-import service.impl.LecturerServiceImpl;
-import service.impl.SemesterServiceImpl;
-import service.impl.SubjectServiceImpl;
+import service.impl.StudentServiceImpl;
 
 /**
  *
  * @author admin
  */
-public class TrainingAddCourseController extends BaseRequiredTrainingAuthenticationController {
-
-    LecturerService ldb = new LecturerServiceImpl();
-    SemesterService sdb = new SemesterServiceImpl();
-    SubjectService subdb = new SubjectServiceImpl();
-    CourseService cdb = new CourseServiceImpl();
+public class TrainingAddStudentIntoCourseController extends BaseRequiredTrainingAuthenticationController {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -52,17 +39,18 @@ public class TrainingAddCourseController extends BaseRequiredTrainingAuthenticat
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount acc, Training training)
             throws ServletException, IOException {
+        StudentService stuDb = new StudentServiceImpl();
+        CourseService cdb = new CourseServiceImpl(); 
         try {
-            ArrayList<Lecturer> lecturerList = ldb.getAll();
-            ArrayList<Semester> semesterList = sdb.getAll();
-            ArrayList<Subject> subjectList = subdb.getAllSubject();
-            request.setAttribute("lecList", lecturerList);
-            request.setAttribute("seList", semesterList);
-            request.setAttribute("subList", subjectList);
+            int courseId = Integer.parseInt(request.getParameter("course_id"));
+            Course course = cdb.getCourseById(courseId);
+            ArrayList<Student> list = stuDb.getAllStudent();
+            request.setAttribute("course", course);
+            request.setAttribute("studentList", list);
         } catch (Exception ex) {
-            Logger.getLogger(TrainingAddCourseController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
-        request.getRequestDispatcher("../view/trainingUI/training-add-course.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/trainingUI/training-add-student.jsp").forward(request, response);
     }
 
     /**
@@ -78,26 +66,19 @@ public class TrainingAddCourseController extends BaseRequiredTrainingAuthenticat
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount acc, Training training)
             throws ServletException, IOException {
-        Course course = new Course();
+        CourseService cdb = new CourseServiceImpl();
         try {
-            String courseName = request.getParameter("course");
-            String lecturerId = request.getParameter("lecturer");
-            String subjectId = request.getParameter("subject");
-            String semesterId = request.getParameter("semester");
-            
-            Lecturer lecturer = ldb.getLecturerById(Integer.parseInt(lecturerId));
-            Subject subject = subdb.getSubjectById(Integer.parseInt(subjectId));
-            Semester semester = sdb.getSemesterById(Integer.parseInt(semesterId));
-            
-            course.setName(courseName);
-            course.setLecturer(lecturer);
-            course.setSubject(subject);
-            course.setSemester(semester);
-            cdb.insertNewCourse(course);
+            int courseId = Integer.parseInt(request.getParameter("course_id"));
+            String[] studentIds = request.getParameterValues("student");
+            int[] studentId = new int[studentIds.length];
+            for (int i = 0; i < studentIds.length; i++) {
+                studentId[i] = Integer.parseInt(studentIds[i]);
+                cdb.insertStudentIntoCourse(studentId[i], courseId);
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        response.sendRedirect("/AssignmentPRJ301/training/addStudent?course_id="+course.getId());
+        response.sendRedirect("/AssignmentPRJ301/training/view");
     }
 
     /**

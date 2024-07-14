@@ -6,7 +6,6 @@ package controller.training;
 
 import entity.UserAccount;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,13 +45,13 @@ public class LoginForTrainingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter("usernameT");
+        String password = request.getParameter("passwordT");
 
         UserAccountService db = new UserAccountServiceImpl();
         UserAccount user;
         try {
-            user = db.getLecturerByUsernamePassword(username, password);
+            user = db.getTrainingByUsernamePassword(username, password);
             if (user != null) {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("/AssignmentPRJ301/training/view");

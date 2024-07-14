@@ -2,17 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao;
+package service;
 
-import entity.Subject;
-import java.util.ArrayList;
+import dao.SemesterDAO;
 
 /**
  *
  * @author admin
  */
-public interface SubjectDAO {
-    ArrayList<Subject> getAllSubject() throws Exception;
+public interface SemesterService extends SemesterDAO{
     
-    Subject getSubjectById(int id) throws Exception;
 }

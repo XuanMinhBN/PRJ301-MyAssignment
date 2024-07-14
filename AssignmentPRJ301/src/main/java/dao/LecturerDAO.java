@@ -4,15 +4,15 @@
  */
 package dao;
 
-import entity.Subject;
+import entity.Lecturer;
 import java.util.ArrayList;
 
 /**
  *
  * @author admin
  */
-public interface SubjectDAO {
-    ArrayList<Subject> getAllSubject() throws Exception;
+public interface LecturerDAO {
+    ArrayList<Lecturer> getAll() throws Exception;
     
-    Subject getSubjectById(int id) throws Exception;
+    Lecturer getLecturerById(int id) throws Exception;
 }

@@ -32,6 +32,18 @@
         <servlet-name>StudentMarkReportController</servlet-name>
         <servlet-class>controller.student.StudentMarkReportController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddCourseController</servlet-name>
+        <servlet-class>controller.training.AddCourseController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginForTrainingController</servlet-name>
+        <servlet-class>controller.training.LoginForTrainingController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TrainingViewController</servlet-name>
+        <servlet-class>controller.training.TrainingViewController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LecturerViewController</servlet-name>
         <url-pattern>/lecturer/view</url-pattern>
@@ -63,6 +75,18 @@
     <servlet-mapping>
         <servlet-name>StudentMarkReportController</servlet-name>
         <url-pattern>/student/mark</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCourseController</servlet-name>
+        <url-pattern>/training/addCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginForTrainingController</servlet-name>
+        <url-pattern>/training/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TrainingViewController</servlet-name>
+        <url-pattern>/training/view</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

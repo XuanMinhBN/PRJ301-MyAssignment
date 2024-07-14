@@ -19,11 +19,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserAccount {
-    private String username;
-    private String password;
-    private String displayname;
-    private Lecturer lecturer;
-    private Student student;
-    private Training training;
+public class Training {
+    private int id;
+    private String name;
 }

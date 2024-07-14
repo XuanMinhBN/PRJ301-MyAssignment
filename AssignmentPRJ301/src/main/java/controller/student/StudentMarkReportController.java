@@ -30,6 +30,8 @@ public class StudentMarkReportController extends BaseRequiredStudentAuthenticati
      *
      * @param request servlet request
      * @param response servlet response
+     * @param user
+     * @param student
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -58,6 +60,8 @@ public class StudentMarkReportController extends BaseRequiredStudentAuthenticati
      *
      * @param request servlet request
      * @param response servlet response
+     * @param user
+     * @param student
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

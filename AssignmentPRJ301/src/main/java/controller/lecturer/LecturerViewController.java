@@ -31,6 +31,8 @@ public class LecturerViewController extends BaseRequiredLecturerAuthenticationCo
      *
      * @param request servlet request
      * @param response servlet response
+     * @param user
+     * @param lecturer
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -54,6 +56,8 @@ public class LecturerViewController extends BaseRequiredLecturerAuthenticationCo
      *
      * @param request servlet request
      * @param response servlet response
+     * @param user
+     * @param lecturer
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

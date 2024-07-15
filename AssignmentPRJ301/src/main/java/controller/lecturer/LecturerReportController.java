@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.training;
+package controller.lecturer;
 
-import controller.authentication.BaseRequiredTrainingAuthenticationController;
-import entity.Training;
+import controller.authentication.BaseRequiredLecturerAuthenticationController;
+import entity.Lecturer;
 import entity.UserAccount;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author admin
  */
-public class TrainingViewController extends BaseRequiredTrainingAuthenticationController {
+public class LecturerReportController extends BaseRequiredLecturerAuthenticationController {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -24,15 +24,15 @@ public class TrainingViewController extends BaseRequiredTrainingAuthenticationCo
      *
      * @param request servlet request
      * @param response servlet response
-     * @param acc
-     * @param training
+     * @param user
+     * @param lecturer
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount acc, Training training)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount user, Lecturer lecturer)
             throws ServletException, IOException {
-        request.getRequestDispatcher("../view/trainingUI/training-view.jsp").forward(request, response);
+        
     }
 
     /**
@@ -40,15 +40,15 @@ public class TrainingViewController extends BaseRequiredTrainingAuthenticationCo
      *
      * @param request servlet request
      * @param response servlet response
-     * @param acc
-     * @param training
+     * @param user
+     * @param lecturer
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount acc, Training training)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount user, Lecturer lecturer)
             throws ServletException, IOException {
-       
+        
     }
 
     /**

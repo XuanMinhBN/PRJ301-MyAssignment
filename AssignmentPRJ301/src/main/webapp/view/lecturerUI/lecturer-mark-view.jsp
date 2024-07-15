@@ -45,5 +45,10 @@
             <input type="hidden" name="course_id" value="${param.course_id}"/>
             <input type="submit" value="Save" />
         </form>
+        <form action="getReport" method="GET">
+                <input type="hidden" name="course_id" value="${param.course_id}">
+                <input type="hidden" name="exam_id" value="${paramValues.exam_id}">
+                <input type="submit" value="Report">
+        </form>
     </body>
 </html>

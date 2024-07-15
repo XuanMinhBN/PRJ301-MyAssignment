@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author admin
  */
-public class TrainingViewController extends BaseRequiredTrainingAuthenticationController {
+public class TrainingViewMarkReportController extends BaseRequiredTrainingAuthenticationController {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -32,7 +32,7 @@ public class TrainingViewController extends BaseRequiredTrainingAuthenticationCo
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount acc, Training training)
             throws ServletException, IOException {
-        request.getRequestDispatcher("../view/trainingUI/training-view.jsp").forward(request, response);
+        
     }
 
     /**
@@ -48,7 +48,7 @@ public class TrainingViewController extends BaseRequiredTrainingAuthenticationCo
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount acc, Training training)
             throws ServletException, IOException {
-       
+        
     }
 
     /**

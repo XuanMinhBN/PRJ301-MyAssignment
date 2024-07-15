@@ -163,4 +163,6 @@ public interface Query {
             + "ON sub.subject_id = a.subject_id\n"
             + "WHERE s.student_id = ? AND sub.subject_id = ?\n"
             + "GROUP BY s.roll, s.student_name";
+    String INSERT_AVERAGE = "INSERT INTO mark_report\n"
+            + "VALUES (?,?,?,?)";
 }

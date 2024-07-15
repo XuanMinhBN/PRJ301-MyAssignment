@@ -96,7 +96,14 @@ public interface Query {
 
     //Query for GradeDAO
     String GET_GRADE = "SELECT exam_id, student_id, score FROM grades WHERE (1 > 2)";
-    String DELETE_GRADE_IN_STUDENT_COURSE = "DELETE FROM grades WHERE student_id IN (SELECT student_id FROM student_and_course WHERE course_id=?)";
+    String DELETE_GRADE_IN_STUDENT_COURSE = "DELETE g FROM grades g\n"
+            + "INNER JOIN exams e\n"
+            + "ON g.exam_id = e.exam_id\n"
+            + "INNER JOIN assesment a \n"
+            + "ON a.assesment_id = e.assesment_id\n"
+            + "INNER JOIN course c\n"
+            + "ON a.subject_id = c.subject_id\n"
+            + "WHERE c.course_id = ?";
     String INSERT_GRADE = "INSERT INTO [grades]\n"
             + "           ([exam_id]\n"
             + "           ,[student_id]\n"

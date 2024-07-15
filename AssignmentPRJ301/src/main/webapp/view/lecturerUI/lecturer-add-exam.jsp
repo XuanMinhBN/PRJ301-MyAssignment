@@ -28,7 +28,7 @@
                 <div class="col-4" style="margin-top: 140px;">
                     <form action="add" method="POST" class="create-form">
                         <input type="date" name="start_time"/>
-                        <div class="form-floating">
+                        <div class="form-floating mt-3">
                             <select name="duration" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                                 <option selected>Open this select menu</option>
                                 <option value="15">15 Minutes</option>
@@ -43,7 +43,7 @@
                             <label for="floatingSelect">Duration</label>
                         </div>
                         <input type="hidden" name="course_id" value="${param.course_id}"/>
-                        <div class="form-floating">
+                        <div class="form-floating mt-3">
                             <select name="assessment_id" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                                 <c:forEach items="${requestScope.assessment}" var="a">
                                     <option value="${a.id}">${a.name}</option>
@@ -51,7 +51,7 @@
                             </select>
                             <label for="floatingSelect">Assessment</label>
                         </div>
-                        <button type="submit" class="btn btn-outline-success">Success</button>
+                        <button type="submit" class="btn btn-outline-success mt-3">Success</button>
                     </form>
                 </div>
                 <div class="col-4"></div>

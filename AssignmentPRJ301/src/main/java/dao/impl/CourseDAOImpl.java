@@ -151,6 +151,4 @@ public class CourseDAOImpl implements CourseDAO, Query {
         }
         return null;
     }
-    
-    
 }

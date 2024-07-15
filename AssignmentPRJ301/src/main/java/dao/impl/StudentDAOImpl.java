@@ -46,7 +46,9 @@ public class StudentDAOImpl implements StudentDAO, Query {
     public ArrayList<Grade> getMarkForStudent(int studentId) throws Exception {
         ArrayList<Grade> grade = new ArrayList<>();
         try (
-                Connection connection = SQLConnection.getConnection(); PreparedStatement ps = connection.prepareStatement(STUDENT_MARK_REPORT)) {
+             Connection connection = SQLConnection.getConnection(); 
+             PreparedStatement ps = connection.prepareStatement(STUDENT_MARK_REPORT)
+             ) {
             ps.setInt(1, studentId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

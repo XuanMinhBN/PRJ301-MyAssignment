@@ -20,8 +20,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MarkReport {
-    private int studentId;
-    private int subjectId;
+    private Student studentId;
+    private Subject subjectId;
     private float averageMark;
     private boolean markStatus;
 }

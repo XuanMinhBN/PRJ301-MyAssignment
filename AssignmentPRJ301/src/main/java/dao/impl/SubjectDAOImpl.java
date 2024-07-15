@@ -56,5 +56,23 @@ public class SubjectDAOImpl implements SubjectDAO, Query{
         }
         return null;
     }
-    
+
+    @Override
+    public Subject getSubjectByCourseId(int id) throws Exception {
+        try (
+            Connection connection = SQLConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(GET_SUBJECT_BY_COURSE_ID)
+        ) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Subject subject = new Subject();
+                subject.setId(rs.getInt("subject_id"));
+                return subject;
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+        return null;
+    }
 }

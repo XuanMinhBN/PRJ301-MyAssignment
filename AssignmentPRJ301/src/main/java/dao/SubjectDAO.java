@@ -15,4 +15,6 @@ public interface SubjectDAO {
     ArrayList<Subject> getAllSubject() throws Exception;
     
     Subject getSubjectById(int id) throws Exception;
+    
+    Subject getSubjectByCourseId(int id) throws Exception;
 }

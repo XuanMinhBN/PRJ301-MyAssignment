@@ -22,12 +22,49 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <c:if test="${requestScope.report eq null}">
+                        <form action="viewReport" method="POST">
+                            <h3 class="text-center">Subject</h3> <select name="course_id" class="form-select form-select-lg mb-3" aria-label="Large select example">
+                                <c:forEach items="${requestScope.subject}" var="c">
+                                    <option value="${c.id}">${c.name}</option>
+                                </c:forEach>
+                            </select>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-outline-success">View</button>
+                            </div>
+                        </form>
+                    </c:if>
+                    <c:if test="${requestScope.report ne null}">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Student Roll</th>
+                                    <th scope="col">Student Name</th>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">Average Mark</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.report}" var="r">
+                                    <tr>
+                                        <th scope="row">${r.studentId.roll}</th>
+                                        <td>${r.studentId.name}</td>
+                                        <td>${r.subjectId.name}</td>
+                                        <td>${r.averageMark}</td>
+                                        <td>${r.markStatus}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
                 </div>
+                <div class="col-3"></div>
             </div>
         </div>
-        
+
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

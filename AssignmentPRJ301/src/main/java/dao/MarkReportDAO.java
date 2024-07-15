@@ -12,5 +12,9 @@ import java.util.ArrayList;
  * @author admin
  */
 public interface MarkReportDAO {
-    ArrayList<MarkReport> getReportList() throws Exception; 
+    ArrayList<MarkReport> getReportList(int id) throws Exception; 
+    
+    void insertStudentReport(int stuId, int subId) throws Exception;
+    
+    void updateMarkStatus() throws Exception;
 }

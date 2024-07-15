@@ -26,4 +26,9 @@ public class SubjectServiceImpl implements SubjectService{
     public Subject getSubjectById(int id) throws Exception {
         return subjectDAO.getSubjectById(id);
     }
+
+    @Override
+    public Subject getSubjectByCourseId(int id) throws Exception {
+        return subjectDAO.getSubjectByCourseId(id);
+    }
 }

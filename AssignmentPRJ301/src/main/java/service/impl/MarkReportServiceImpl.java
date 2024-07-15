@@ -18,8 +18,18 @@ public class MarkReportServiceImpl implements MarkReportService{
     MarkReportDAO markReportDAO = new MarkReportDAOImpl();
     
     @Override
-    public ArrayList<MarkReport> getReportList() throws Exception {
-        return markReportDAO.getReportList();
+    public ArrayList<MarkReport> getReportList(int id) throws Exception {
+        return markReportDAO.getReportList(id);
+    }
+
+    @Override
+    public void insertStudentReport(int stuId, int subId) throws Exception {
+        markReportDAO.insertStudentReport(stuId,subId);
+    }
+
+    @Override
+    public void updateMarkStatus() throws Exception {
+        markReportDAO.updateMarkStatus();
     }
     
 }

@@ -138,6 +138,10 @@ public interface Query {
     String SELECT_ALL_SUBJECT = "SELECT * FROM subjects";
     String GET_SUBJECT_BY_ID = "SELECT * FROM subjects \n"
             + "WHERE subject_id = ?";
+    String GET_SUBJECT_BY_COURSE_ID = "SELECT sub.subject_id FROM subjects sub\n"
+            + "JOIN course c\n"
+            + "ON sub.subject_id = c.subject_id\n"
+            + "WHERE c.course_id = ?";
 
     //Query for SemesterDAO
     String SELECT_CURRENT_SEMESTER = "SELECT * FROM semester \n"
@@ -151,7 +155,7 @@ public interface Query {
             + "WHERE active = 1";
 
     //Query to calculate
-    String AVERAGE = "SELECT s.roll, s.student_name, SUM(a.weight_mark*g.score) AS total\n"
+    String AVERAGE = "SELECT s.student_id, a.subject_id, SUM(a.weight_mark*g.score) AS total\n"
             + "FROM assesment a\n"
             + "JOIN exams e\n"
             + "ON a.assesment_id = e.assesment_id\n"
@@ -159,10 +163,18 @@ public interface Query {
             + "ON g.exam_id = e.exam_id\n"
             + "JOIN student s\n"
             + "ON g.student_id = s.student_id\n"
+            + "WHERE s.student_id = ? AND a.subject_id = ?\n"
+            + "GROUP BY s.student_id, a.subject_id\n"
+            + "ORDER BY a.subject_id";
+    String INSERT_AVERAGE = "INSERT INTO mark_report (student_id,subject_id,average_mark)" + AVERAGE;
+    String UPDATE_MARK_STATUS = "UPDATE mark_report\n"
+            + "SET mark_status = 1\n"
+            + "WHERE average_mark >= 5;";
+    String SELECT_REPORT = "SELECT s.roll,s.student_name,sub.subject_name,mr.average_mark,mr.mark_status \n"
+            + "FROM mark_report mr\n"
+            + "JOIN student s \n"
+            + "ON mr.student_id = s.student_id\n"
             + "JOIN subjects sub\n"
-            + "ON sub.subject_id = a.subject_id\n"
-            + "WHERE s.student_id = ? AND sub.subject_id = ?\n"
-            + "GROUP BY s.roll, s.student_name";
-    String INSERT_AVERAGE = "INSERT INTO mark_report\n"
-            + "VALUES (?,?,?,?)";
+            + "ON mr.subject_id = sub.subject_id\n"
+            + "WHERE mr.subject_id = ?";
 }

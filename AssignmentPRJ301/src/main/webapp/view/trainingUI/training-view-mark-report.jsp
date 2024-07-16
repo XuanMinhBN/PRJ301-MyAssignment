@@ -25,8 +25,8 @@
                 <div class="col-3"></div>
                 <div class="col-6">
                     <c:if test="${requestScope.report eq null}">
-                        <form action="viewReport" method="POST">
-                            <h3 class="text-center">Subject</h3> <select name="course_id" class="form-select form-select-lg mb-3" aria-label="Large select example">
+                        <form action="viewReport" method="POST" class="mb-3">
+                            <h3 class="text-center">Subject</h3> <select name="subject_id" class="form-select form-select-lg mb-3" aria-label="Large select example">
                                 <c:forEach items="${requestScope.subject}" var="c">
                                     <option value="${c.id}">${c.name}</option>
                                 </c:forEach>
@@ -37,7 +37,7 @@
                         </form>
                     </c:if>
                     <c:if test="${requestScope.report ne null}">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered mt-5">
                             <thead>
                                 <tr>
                                     <th scope="col">Student Roll</th>
@@ -53,8 +53,13 @@
                                         <th scope="row">${r.studentId.roll}</th>
                                         <td>${r.studentId.name}</td>
                                         <td>${r.subjectId.name}</td>
-                                        <td>${r.averageMark}</td>
-                                        <td>${r.markStatus}</td>
+                                        <td>
+                                            <p class="text-center" style="margin: 0;">${r.averageMark}</p>
+                                        </td>
+                                        <td>
+                                            ${r.markStatus == true ? '<p class="text-center" style="margin:0; padding:4px; background:green; color:#fff; border-radius:10px;">Passed</p>' 
+                                                                   : '<p class="text-center" style="margin:0; padding:4px; background:red; color:#fff; border-radius:10px;">Not Passed</p>'}
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

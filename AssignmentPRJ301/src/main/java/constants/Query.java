@@ -135,8 +135,8 @@ public interface Query {
             + "WHERE lecturer_id = ?";
 
     //Query for SubjectDAO
-    String SELECT_ALL_SUBJECT = "SELECT * FROM subjects";
-    String GET_SUBJECT_BY_ID = "SELECT * FROM subjects \n"
+    String SELECT_ALL_SUBJECT = "SELECT subject_id, subject_name FROM subjects";
+    String GET_SUBJECT_BY_ID = "SELECT subject_id, subject_name FROM subjects \n"
             + "WHERE subject_id = ?";
     String GET_SUBJECT_BY_COURSE_ID = "SELECT sub.subject_id FROM subjects sub\n"
             + "JOIN course c\n"
@@ -170,7 +170,7 @@ public interface Query {
     String UPDATE_MARK_STATUS = "UPDATE mark_report\n"
             + "SET mark_status = 1\n"
             + "WHERE average_mark >= 5;";
-    String SELECT_REPORT = "SELECT s.roll,s.student_name,sub.subject_name,mr.average_mark,mr.mark_status \n"
+    String SELECT_REPORT = "SELECT s.student_id,s.roll,s.student_name,sub.subject_id,sub.subject_name,mr.average_mark,mr.mark_status \n"
             + "FROM mark_report mr\n"
             + "JOIN student s \n"
             + "ON mr.student_id = s.student_id\n"

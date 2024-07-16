@@ -63,13 +63,15 @@ public class TrainingViewMarkReportController extends BaseRequiredTrainingAuthen
     protected void doPost(HttpServletRequest request, HttpServletResponse response, UserAccount acc, Training training)
             throws ServletException, IOException {
         MarkReportService mdb = new MarkReportServiceImpl();
+        ArrayList<MarkReport> reportList = null;
         try{
             int subjectId = Integer.parseInt(request.getParameter("subject_id"));
-            ArrayList<MarkReport> reportList = mdb.getReportList(subjectId);
-            request.setAttribute("report", reportList);
+            reportList = mdb.getReportList(subjectId);    
         }catch(Exception e){
             System.out.println(e.getMessage());
-        } 
+        }
+        request.setAttribute("report", reportList);
+        request.getRequestDispatcher("../view/trainingUI/training-view-mark-report.jsp").forward(request, response);
     }
 
     /**

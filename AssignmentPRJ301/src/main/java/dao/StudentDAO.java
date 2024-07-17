@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public interface StudentDAO {
     ArrayList<Student> getStudentsByCourse(int courseId) throws Exception;
     
-    ArrayList<Grade> getMarkForStudent(int studentId) throws Exception;
+    ArrayList<Grade> getMarkForStudent(int studentId, int subjectId) throws Exception;
     
     ArrayList<Student> getAllStudent() throws Exception;
 }

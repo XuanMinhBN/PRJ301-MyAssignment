@@ -13,9 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import service.GradeService;
 import service.StudentService;
-import service.impl.GradeServiceImpl;
 import service.impl.StudentServiceImpl;
 
 /**
@@ -39,12 +37,11 @@ public class StudentMarkReportController extends BaseRequiredStudentAuthenticati
     protected void doGet(HttpServletRequest request, HttpServletResponse response, UserAccount user, Student student)
             throws ServletException, IOException {
         StudentService studentService = new StudentServiceImpl();
-        GradeService gradeService = new GradeServiceImpl();
         int studentId = Integer.parseInt(request.getParameter("student_id"));
         int subjectId = Integer.parseInt(request.getParameter("subject_id"));
         ArrayList<Grade> gradeList = null;
         try {
-            gradeList = studentService.getMarkForStudent(studentId);
+            gradeList = studentService.getMarkForStudent(studentId,subjectId);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

@@ -43,13 +43,14 @@ public class StudentDAOImpl implements StudentDAO, Query {
     }
 
     @Override
-    public ArrayList<Grade> getMarkForStudent(int studentId) throws Exception {
+    public ArrayList<Grade> getMarkForStudent(int studentId, int subjectId) throws Exception {
         ArrayList<Grade> grade = new ArrayList<>();
         try (
              Connection connection = SQLConnection.getConnection(); 
              PreparedStatement ps = connection.prepareStatement(STUDENT_MARK_REPORT)
              ) {
             ps.setInt(1, studentId);
+            ps.setInt(2, subjectId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Subject sub = new Subject();

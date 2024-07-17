@@ -126,7 +126,7 @@ public interface Query {
             + "ON e.assesment_id = a.assesment_id\n"
             + "JOIN subjects sub\n"
             + "ON sub.subject_id = a.subject_id\n"
-            + "WHERE s.student_id = ?";
+            + "WHERE s.student_id = ? AND sub.subject_id = ?";
     String SELECT_ALL_STUDENT = "SELECT * FROM student ";
 
     //Query for LecturerDAO
